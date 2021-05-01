@@ -10,6 +10,7 @@ const Bloom: React.FC<OwnProps> = ({
 }) => {
     return (
         <>
+            <p>Bloom v0.0.2</p>
             <Routes />
             {/* <MenuBar></MenuBar> */}
         </>
