@@ -1,8 +1,17 @@
-import React from 'react'
+import MenuBar from 'components/MenuBar'
 
-const Dashboard = () => {
+interface OwnProps {
+    bloomVersion: string
+}
+
+const Dashboard: React.FC<OwnProps> = ({
+    bloomVersion
+}) => {
     return (
         <>
+            <MenuBar
+                bloomVersion={bloomVersion}
+            />
             <p>This is the Dashboard!</p>
         </>
     );

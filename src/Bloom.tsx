@@ -1,19 +1,14 @@
 import React from 'react'
 import Routes from 'Routes'
+import { StyledBloom } from 'styles';
 
-interface OwnProps {
-    myRandomProp?: string
-}
+const BLOOM_VERSION = "v0.0.3"
 
-const Bloom: React.FC<OwnProps> = ({
-    myRandomProp
-}) => {
+const Bloom = () => {
     return (
-        <>
-            <p>Bloom v0.0.2</p>
-            <Routes />
-            {/* <MenuBar></MenuBar> */}
-        </>
+        <StyledBloom>
+            <Routes bloomVersion={BLOOM_VERSION} />
+        </StyledBloom>
     );
 };
 

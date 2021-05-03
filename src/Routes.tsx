@@ -3,17 +3,26 @@ import { BrowserRouter } from 'react-router-dom'
 import { Switch, Route } from 'react-router'
 import Dashboard from 'pages/Dashboard'
 import AppletContainer from 'pages/AppletContainer'
+import AppletReducer from 'components/AppletReducer'
 
-const Routes: React.FC = () => {
+interface OwnProps {
+    bloomVersion: string
+}
+
+const Routes: React.FC<OwnProps> = ({
+    bloomVersion
+}) => {
 
     return (
         <BrowserRouter>
             <Switch>
                 <Route exact path="/" >
-                    <Dashboard />
+                    <Dashboard bloomVersion={bloomVersion} />
                 </Route>
                 <Route exact path="/:appletName" >
-                    <AppletContainer />
+                    <AppletReducer>
+                        <AppletContainer bloomVersion={bloomVersion} />
+                    </AppletReducer>
                 </Route>
             </Switch>
         </BrowserRouter>
