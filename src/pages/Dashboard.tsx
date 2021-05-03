@@ -3,12 +3,24 @@ import MenuBar from 'components/MenuBar';
 
 interface OwnProps {
     bloomVersion: string;
+    setShouldRedirect: (shouldRedirect: boolean) => void;
+    setRedirectLocation: (redirectLocation: string) => void;
 }
 
-const Dashboard: React.FC<OwnProps> = ({ bloomVersion }) => {
+const Dashboard: React.FC<OwnProps> = ({
+    bloomVersion,
+    setShouldRedirect,
+    setRedirectLocation,
+}) => {
     return (
         <>
-            <MenuBar bloomVersion={bloomVersion} />
+            <MenuBar
+                bloomVersion={bloomVersion}
+                setSelectedApplet={(appletName: string) => {
+                    setShouldRedirect(true);
+                    setRedirectLocation(appletName);
+                }}
+            />
             <p>This is the Dashboard!</p>
         </>
     );

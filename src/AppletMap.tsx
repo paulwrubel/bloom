@@ -1,14 +1,12 @@
 /* eslint-disable sonarjs/no-duplicate-string */
-import ActionPayload from 'interfaces/ActionPayload';
 import AppletInfo from 'interfaces/AppletInfo';
-import LooseObject from 'interfaces/LooseObject';
-import { createContext } from 'react';
 
+import ChainballControlDrawer from 'sketches/chainball/ChainballControlDrawer';
 import p5_chainball from 'sketches/chainball/p5_chainball';
 import {
-    initialState as chainballInitialState,
-    reducer as chainballReducer,
-} from 'sketches/chainball/reducer';
+    chainballInitialState,
+    chainballReducer,
+} from 'sketches/chainball/chainballReducer';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
@@ -23,13 +21,10 @@ const appletMap: Map<string, AppletInfo> = new Map([
             creationDate: new Date('February 9, 2020 00:00:00'),
 
             sketchInstance: p5_chainball,
+            controlDrawerComponent: ChainballControlDrawer,
 
             initialState: chainballInitialState,
             reducer: chainballReducer,
-            stateContext: createContext<LooseObject>(chainballInitialState),
-            dispatchContext: createContext<React.Dispatch<ActionPayload>>(
-                () => {},
-            ),
         },
     ],
     [

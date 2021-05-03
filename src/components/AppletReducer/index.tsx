@@ -1,6 +1,7 @@
 import appletMap from 'AppletMap';
+import ActionPayload from 'interfaces/ActionPayload';
 import LooseObject from 'interfaces/LooseObject';
-import React, { useReducer } from 'react';
+import React, { createContext, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
 
 interface AppletParams {
@@ -23,6 +24,19 @@ const AppletReducer: React.FC<OwnProps> = ({ children }) => {
               },
         appletInfo ? appletInfo.initialState : {},
     );
+
+    if (appletInfo) {
+        if (!appletInfo.dispatchContext) {
+            appletInfo.dispatchContext = createContext<
+                React.Dispatch<ActionPayload>
+            >(() => {});
+        }
+        if (!appletInfo.stateContext) {
+            appletInfo.stateContext = createContext<LooseObject>(
+                appletInfo.initialState,
+            );
+        }
+    }
 
     return (
         <>

@@ -1,14 +1,17 @@
 import React from 'react';
 import Routes from 'Routes';
 import { StyledBloom } from 'styles';
+import { StylesProvider } from '@material-ui/core/styles';
 
-const BLOOM_VERSION = 'v0.0.3';
+const BLOOM_VERSION = 'v0.0.4';
 
 const Bloom: React.FC = () => {
     return (
-        <StyledBloom>
-            <Routes bloomVersion={BLOOM_VERSION} />
-        </StyledBloom>
+        <StylesProvider injectFirst>
+            <StyledBloom>
+                <Routes bloomVersion={BLOOM_VERSION} />
+            </StyledBloom>
+        </StylesProvider>
     );
 };
 

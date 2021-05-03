@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Switch, Route } from 'react-router';
 import Dashboard from 'pages/Dashboard';
@@ -10,15 +10,28 @@ interface OwnProps {
 }
 
 const Routes: React.FC<OwnProps> = ({ bloomVersion }) => {
+    const [shouldRedirect, setShouldRedirect] = useState(false);
+    const [redirectLocation, setRedirectLocation] = useState('');
+
     return (
         <BrowserRouter>
             <Switch>
                 <Route exact path="/">
-                    <Dashboard bloomVersion={bloomVersion} />
+                    <Dashboard
+                        bloomVersion={bloomVersion}
+                        setShouldRedirect={setShouldRedirect}
+                        setRedirectLocation={setRedirectLocation}
+                    />
                 </Route>
                 <Route exact path="/:appletName">
                     <AppletReducer>
-                        <AppletContainer bloomVersion={bloomVersion} />
+                        <AppletContainer
+                            bloomVersion={bloomVersion}
+                            shouldRedirect={shouldRedirect}
+                            setShouldRedirect={setShouldRedirect}
+                            redirectLocation={redirectLocation}
+                            setRedirectLocation={setRedirectLocation}
+                        />
                     </AppletReducer>
                 </Route>
             </Switch>

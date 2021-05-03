@@ -1,3 +1,4 @@
+import { Toolbar } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const ExpandingWrapper = styled.div`
@@ -16,4 +17,10 @@ export const AppBarWrapper = styled.div`
 
 export const SpaceBox = styled.div`
     margin: 4px;
+`;
+
+export const StyledToolbar = styled(Toolbar)`
+    height: 56px;
+    min-height: 56px;
+    border-radius: 0px;
 `;

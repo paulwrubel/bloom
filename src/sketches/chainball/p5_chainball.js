@@ -440,13 +440,19 @@ let chainball = (p) => {
         );
     };
 
-    p.updateState = ({ ballCount }) => {
+    p.updateState = ({ ballCount, linkLength }) => {
         if (didSetup) {
             if (
                 typeof ballCount !== 'undefined' &&
                 balls.length !== ballCount
             ) {
                 p.setBallCount(ballCount);
+            }
+            if (
+                typeof linkLength !== 'undefined' &&
+                defaultFollowDistance !== linkLength
+            ) {
+                p.setFollowDistance(linkLength);
             }
         }
     };

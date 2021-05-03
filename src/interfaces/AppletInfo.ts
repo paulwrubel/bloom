@@ -10,6 +10,7 @@ export default interface AppletInfo {
     creationDate: Date;
 
     sketchInstance: (p: p5) => void;
+    controlDrawerComponent: React.FC<Record<string, unknown>>;
 
     initialState: LooseObject;
     reducer: (state: LooseObject, actionPayload: ActionPayload) => LooseObject;

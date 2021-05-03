@@ -4,8 +4,6 @@ import React, { useContext, useEffect, useRef } from 'react';
 import ActionPayload from 'interfaces/ActionPayload';
 import { P5ContainerWrapper } from './styles';
 
-const CLASS_NAME = 'P5Container';
-
 interface p5WithUpdatingStateAndDispatch extends p5 {
     dispatch?: React.Dispatch<ActionPayload>;
     updateState(state: LooseObject): void;
@@ -52,7 +50,7 @@ const P5Container: React.FC<OwnProps> = ({
     }, [sketchInstance, dispatch, state]);
 
     return (
-        <P5ContainerWrapper className={CLASS_NAME}>
+        <P5ContainerWrapper className="P5Container">
             <div ref={sketchRef} />
         </P5ContainerWrapper>
     );
