@@ -26,9 +26,18 @@
             "error",
             5
         ],
-        "max-lines-per-function": [
+        "no-empty-function": "off",
+        "@typescript-eslint/no-empty-function": [
             "error",
-            40
+            {
+                "allow": [
+                    "arrowFunctions"
+                ]
+            }
         ]
+        // "max-lines-per-function": [
+        //     "error",
+        //     40
+        // ]
     }
 }

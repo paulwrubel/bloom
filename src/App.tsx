@@ -1,10 +1,8 @@
 import React from 'react';
-import Bloom from 'Bloom'
+import Bloom from 'Bloom';
 
-function App() {
-  return (
-    <Bloom />
-  );
-}
+const App: React.FC = () => {
+    return <Bloom />;
+};
 
 export default App;

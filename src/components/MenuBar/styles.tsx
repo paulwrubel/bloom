@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const ExpandingWrapper = styled.div`
     flex-grow: 1;

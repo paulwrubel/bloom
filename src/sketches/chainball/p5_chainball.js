@@ -1,7 +1,8 @@
+/* eslint-ignore */
+
 import p5 from 'p5';
 
 let chainball = (p) => {
-
     let didSetup = false;
 
     let core;
@@ -10,8 +11,8 @@ let chainball = (p) => {
     let displayFrameRate = 0;
 
     const Modes = {
-        STATIC: "static",
-        DYNAMIC: "dynamic"
+        STATIC: 'static',
+        DYNAMIC: 'dynamic',
     };
 
     let currentMode = Modes.STATIC;
@@ -35,8 +36,8 @@ let chainball = (p) => {
     let linkingLine;
 
     p.setup = function () {
-        let w = p.select(".P5Container").width;// - p.select(".Sidebar").width;
-        let h = p.select(".P5Container").height;
+        let w = p.select('.P5Container').width; // - p.select(".Sidebar").width;
+        let h = p.select('.P5Container').height;
         p.createCanvas(w, h);
         // p.createCanvas(p.windowWidth, p.windowHeight);
         // canvas.parent('Sketch');
@@ -54,20 +55,21 @@ let chainball = (p) => {
             acceleration: p.createVector(0, 0),
             minColor: p.color(240, 0, 100),
             maxColor: p.color(240, 100, 100),
-            isBeingDragged: false
+            isBeingDragged: false,
         };
 
         for (let i = 0; i < ballCount; i++) {
             let followDist;
             let pos;
             if (i === 0) {
-                followDist = defaultFollowDistance + (core.radius - defaultBallRadius);
+                followDist =
+                    defaultFollowDistance + (core.radius - defaultBallRadius);
                 pos = core.position.copy();
             } else {
                 followDist = defaultFollowDistance;
-                console.log(balls.length)
+                console.log(balls.length);
                 pos = balls[balls.length - 1].position.copy();
-                console.log(pos)
+                console.log(pos);
             }
             balls.push({
                 radius: defaultBallRadius,
@@ -75,13 +77,13 @@ let chainball = (p) => {
                 velocity: p.createVector(0, 0),
                 followDistance: followDist,
                 minColor: p.color(0, 0, 100),
-                maxColor: p.color(0, 100, 100)
+                maxColor: p.color(0, 100, 100),
             });
         }
 
         velocityArrow = {
             minColor: p.color(240, 25, 100),
-            maxColor: p.color(240, 100, 100)
+            maxColor: p.color(240, 100, 100),
         };
 
         accelerationArrow = {
@@ -94,7 +96,7 @@ let chainball = (p) => {
             maxCompressionColor: p.color(240, 100, 100, 0.5),
             minTensionColor: p.color(0, 0, 100, 0.5),
             maxTensionColor: p.color(0, 100, 100, 0.5),
-            staticColor: p.color(0, 0, 100, 0.5)
+            staticColor: p.color(0, 0, 100, 0.5),
         };
 
         didSetup = true;
@@ -106,8 +108,10 @@ let chainball = (p) => {
         p.background(0);
         let mouseVector = p.createVector(p.mouseX, p.mouseY);
         let mouseIsOverCanvas =
-            p.mouseX > 0 && p.mouseX < p.width &&
-            p.mouseY > 0 && p.mouseY < p.height;
+            p.mouseX > 0 &&
+            p.mouseX < p.width &&
+            p.mouseY > 0 &&
+            p.mouseY < p.height;
 
         /* DRAWING */
 
@@ -129,22 +133,46 @@ let chainball = (p) => {
                     let targetDistance = thisBall.followDistance;
                     let realDistance = p5.Vector.sub(
                         parentBall.position,
-                        thisBall.position).mag();
+                        thisBall.position,
+                    ).mag();
                     p.colorMode(p.RGB);
                     if (targetDistance > realDistance) {
-                        p.stroke(p.lerpColor(
-                            linkingLine.minCompressionColor,
-                            linkingLine.maxCompressionColor,
-                            p.reRange(realDistance / targetDistance, 1, 0.5, 0, 1)));
+                        p.stroke(
+                            p.lerpColor(
+                                linkingLine.minCompressionColor,
+                                linkingLine.maxCompressionColor,
+                                p.reRange(
+                                    realDistance / targetDistance,
+                                    1,
+                                    0.5,
+                                    0,
+                                    1,
+                                ),
+                            ),
+                        );
                     } else {
-                        p.stroke(p.lerpColor(
-                            linkingLine.minTensionColor,
-                            linkingLine.maxTensionColor,
-                            p.reRange(realDistance / targetDistance, 1, 4, 0, 1)));
+                        p.stroke(
+                            p.lerpColor(
+                                linkingLine.minTensionColor,
+                                linkingLine.maxTensionColor,
+                                p.reRange(
+                                    realDistance / targetDistance,
+                                    1,
+                                    4,
+                                    0,
+                                    1,
+                                ),
+                            ),
+                        );
                     }
                     p.colorMode(p.HSB);
                 }
-                p.line(thisBall.position.x, thisBall.position.y, parentBall.position.x, parentBall.position.y);
+                p.line(
+                    thisBall.position.x,
+                    thisBall.position.y,
+                    parentBall.position.x,
+                    parentBall.position.y,
+                );
                 p.pop();
             }
         }
@@ -164,11 +192,17 @@ let chainball = (p) => {
         // colorMode(RGB);
         p.fill(core.minColor);
         // colorMode(HSB);
-        p.circle(core.position.x, core.position.y, core.radius * 2)
+        p.circle(core.position.x, core.position.y, core.radius * 2);
 
         // draw force arrows
-        accelerationArrow.startPosition = p5.Vector.add(core.position, p5.Vector.sub(mouseVector, core.position).setMag(core.radius));
-        accelerationArrow.vector = p5.Vector.sub(mouseVector, accelerationArrow.startPosition);
+        accelerationArrow.startPosition = p5.Vector.add(
+            core.position,
+            p5.Vector.sub(mouseVector, core.position).setMag(core.radius),
+        );
+        accelerationArrow.vector = p5.Vector.sub(
+            mouseVector,
+            accelerationArrow.startPosition,
+        );
         accelerationArrow.vector.limit(200);
 
         if (mouseIsOverCanvas && core.forceIsBeingApplied) {
@@ -177,16 +211,21 @@ let chainball = (p) => {
                 let accelerationArrowColor = p.lerpColor(
                     accelerationArrow.minColor,
                     accelerationArrow.maxColor,
-                    accelerationArrow.vector.mag() / 200);
+                    accelerationArrow.vector.mag() / 200,
+                );
                 p.colorMode(p.HSB);
                 p.drawArrow(
                     accelerationArrow.startPosition,
                     accelerationArrow.vector,
-                    accelerationArrowColor);
+                    accelerationArrowColor,
+                );
             }
         }
 
-        velocityArrow.startPosition = p5.Vector.add(core.position, core.velocity.copy().setMag(core.radius));
+        velocityArrow.startPosition = p5.Vector.add(
+            core.position,
+            core.velocity.copy().setMag(core.radius),
+        );
         velocityArrow.vector = core.velocity.copy().mult(10);
 
         if (core.velocity.mag() > 0.5) {
@@ -194,12 +233,14 @@ let chainball = (p) => {
             let velocityArrowColor = p.lerpColor(
                 velocityArrow.minColor,
                 velocityArrow.maxColor,
-                velocityArrow.vector.mag() / 250);
+                velocityArrow.vector.mag() / 250,
+            );
             p.colorMode(p.HSB);
             p.drawArrow(
                 velocityArrow.startPosition,
                 velocityArrow.vector,
-                velocityArrowColor);
+                velocityArrowColor,
+            );
         }
 
         // calc framerate
@@ -208,17 +249,18 @@ let chainball = (p) => {
             if (frameRates.length > 10) {
                 frameRates.shift();
             }
-            displayFrameRate = frameRates.reduce((sum, num) => {
-                return sum + num;
-            }) / frameRates.length;
+            displayFrameRate =
+                frameRates.reduce((sum, num) => {
+                    return sum + num;
+                }) / frameRates.length;
         }
 
         // callbacks
         if (p.frameCount % 10 === 0) {
-            if (typeof frameRateCallback !== "undefined") {
+            if (typeof frameRateCallback !== 'undefined') {
                 frameRateCallback(displayFrameRate.toFixed(0));
             }
-            if (typeof coreSpeedCallback !== "undefined") {
+            if (typeof coreSpeedCallback !== 'undefined') {
                 coreSpeedCallback(core.velocity.mag().toFixed(2));
             }
         }
@@ -226,8 +268,6 @@ let chainball = (p) => {
         // p.textSize(32);
         // p.fill(p.color(0, 0, 100));
         // p.text(`fps: ${displayFrameRate.toFixed(0)}`, 5, 35);
-
-
 
         // p.textSize(32);
         // p.fill(p.color(0, 0, 100));
@@ -243,8 +283,15 @@ let chainball = (p) => {
         /* UPDATING */
 
         // update core
-        if (mouseIsOverCanvas && core.forceIsBeingApplied && mouseVector.dist(core.position) > core.radius) {
-            core.acceleration = p5.Vector.mult(accelerationArrow.vector, 0.0005);
+        if (
+            mouseIsOverCanvas &&
+            core.forceIsBeingApplied &&
+            mouseVector.dist(core.position) > core.radius
+        ) {
+            core.acceleration = p5.Vector.mult(
+                accelerationArrow.vector,
+                0.0005,
+            );
         } else {
             core.acceleration = p.createVector(0, 0);
         }
@@ -254,7 +301,6 @@ let chainball = (p) => {
 
         core.position.add(core.velocity);
         p.rebound(core);
-
 
         // update balls
         for (let i = 0; i < balls.length; i++) {
@@ -266,7 +312,10 @@ let chainball = (p) => {
                 parentBall = balls[i - 1];
             }
 
-            let toParent = p5.Vector.sub(parentBall.position, thisBall.position);
+            let toParent = p5.Vector.sub(
+                parentBall.position,
+                thisBall.position,
+            );
             toParent.setMag(toParent.mag() - thisBall.followDistance);
             if (currentMode === Modes.STATIC) {
                 thisBall.velocity.mult(environmentFriction);
@@ -280,9 +329,7 @@ let chainball = (p) => {
             }
 
             p.rebound(thisBall);
-
         }
-
     };
 
     p.windowResized = function () {
@@ -290,19 +337,19 @@ let chainball = (p) => {
     };
 
     p.checkResize = function () {
-        let w = p.select(".P5Container").width;// - p.select(".Sidebar").width;
-        let h = p.select(".P5Container").height;
+        let w = p.select('.P5Container').width; // - p.select(".Sidebar").width;
+        let h = p.select('.P5Container').height;
         if (w !== p.width || h !== p.height) {
             p.resize();
         }
-    }
+    };
 
     p.resize = function () {
-        let w = p.select(".P5Container").width;// - p.select(".Sidebar").width;
-        let h = p.select(".P5Container").height;
+        let w = p.select('.P5Container').width; // - p.select(".Sidebar").width;
+        let h = p.select('.P5Container').height;
         p.resizeCanvas(w, h);
-        console.log("did resize");
-    }
+        console.log('did resize');
+    };
 
     p.mousePressed = function (event) {
         core.forceIsBeingApplied = true;
@@ -312,8 +359,7 @@ let chainball = (p) => {
         core.forceIsBeingApplied = false;
     };
 
-    p.keyTyped = function () {
-    };
+    p.keyTyped = function () { };
 
     p.setBallCount = function (newLength) {
         if (balls.length > newLength) {
@@ -321,7 +367,7 @@ let chainball = (p) => {
         } else if (balls.length < newLength) {
             p.addBalls(newLength - balls.length);
         }
-    }
+    };
 
     p.addBalls = function (count) {
         for (let i = 0; i < count; i++) {
@@ -331,7 +377,7 @@ let chainball = (p) => {
                 velocity: p.createVector(0, 0),
                 followDistance: defaultFollowDistance,
                 minColor: p.color(0, 0, 100),
-                maxColor: p.color(0, 100, 100)
+                maxColor: p.color(0, 100, 100),
             });
         }
     };
@@ -344,7 +390,7 @@ let chainball = (p) => {
 
     p.modifyFollowDistance = function (delta) {
         if (defaultFollowDistance + delta >= 0) {
-            balls.forEach(ball => {
+            balls.forEach((ball) => {
                 ball.followDistance += delta;
             });
             defaultFollowDistance += delta;
@@ -389,43 +435,59 @@ let chainball = (p) => {
     };
 
     p.reRange = function (num, in_min, in_max, out_min, out_max) {
-        return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+        return (
+            ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
+        );
     };
 
     p.updateState = ({ ballCount }) => {
         if (didSetup) {
-            if (typeof ballCount !== "undefined" && balls.length !== ballCount) {
+            if (
+                typeof ballCount !== 'undefined' &&
+                balls.length !== ballCount
+            ) {
                 p.setBallCount(ballCount);
             }
         }
-    }
+    };
 
     p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
         if (didSetup) {
-            if (typeof newProps.mode !== "undefined") {
+            if (typeof newProps.mode !== 'undefined') {
                 currentMode = newProps.mode;
             }
-            if (typeof newProps.ballCount !== "undefined" && balls.length !== newProps.ballCount) {
+            if (
+                typeof newProps.ballCount !== 'undefined' &&
+                balls.length !== newProps.ballCount
+            ) {
                 p.setBallCount(newProps.ballCount);
             }
-            if (typeof newProps.linkLength !== "undefined" && defaultFollowDistance !== newProps.linkLength) {
+            if (
+                typeof newProps.linkLength !== 'undefined' &&
+                defaultFollowDistance !== newProps.linkLength
+            ) {
                 p.setFollowDistance(newProps.linkLength);
             }
-            if (typeof newProps.linkTension !== "undefined" && tension !== newProps.linkTension) {
+            if (
+                typeof newProps.linkTension !== 'undefined' &&
+                tension !== newProps.linkTension
+            ) {
                 tension = newProps.linkTension;
             }
-            if (typeof newProps.linkDamping !== "undefined" && damping !== newProps.linkDamping) {
+            if (
+                typeof newProps.linkDamping !== 'undefined' &&
+                damping !== newProps.linkDamping
+            ) {
                 damping = newProps.linkDamping;
             }
         }
-        if (typeof newProps.onFrameRateChange !== "undefined") {
+        if (typeof newProps.onFrameRateChange !== 'undefined') {
             frameRateCallback = newProps.onFrameRateChange;
         }
-        if (typeof newProps.onCoreSpeedChange !== "undefined") {
+        if (typeof newProps.onCoreSpeedChange !== 'undefined') {
             coreSpeedCallback = newProps.onCoreSpeedChange;
         }
     };
-
 };
 
 export default chainball;

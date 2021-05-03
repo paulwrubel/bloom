@@ -1,19 +1,21 @@
-import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
-import { Menu as MenuIcon } from "@material-ui/icons"
-import React from "react";
-import AppletInfo from "interfaces/AppletInfo"
+import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core';
+import { Menu as MenuIcon } from '@material-ui/icons';
+import React from 'react';
+import AppletInfo from 'interfaces/AppletInfo';
 
-import { ExpandingWrapper, AppBarWrapper, SpaceBox, FlexWrapper } from './styles'
+import {
+    ExpandingWrapper,
+    AppBarWrapper,
+    SpaceBox,
+    FlexWrapper,
+} from './styles';
 
 interface OwnProps {
-    appletInfo?: AppletInfo
-    bloomVersion: string
+    appletInfo?: AppletInfo;
+    bloomVersion: string;
 }
 
-const MenuBar: React.FC<OwnProps> = ({
-    appletInfo,
-    bloomVersion,
-}) => {
+const MenuBar: React.FC<OwnProps> = ({ appletInfo, bloomVersion }) => {
     return (
         <AppBarWrapper>
             <AppBar position="static">
@@ -39,9 +41,7 @@ const MenuBar: React.FC<OwnProps> = ({
                     )}
                     <FlexWrapper>
                         <SpaceBox>
-                            <Typography variant="h6">
-                                Bloom
-                            </Typography>
+                            <Typography variant="h6">Bloom</Typography>
                         </SpaceBox>
                         <SpaceBox>
                             <Typography variant="subtitle1">
@@ -50,9 +50,9 @@ const MenuBar: React.FC<OwnProps> = ({
                         </SpaceBox>
                     </FlexWrapper>
                 </Toolbar>
-            </AppBar >
+            </AppBar>
         </AppBarWrapper>
-    )
-}
+    );
+};
 
 export default MenuBar;
