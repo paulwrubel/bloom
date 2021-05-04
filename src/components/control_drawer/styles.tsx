@@ -5,7 +5,7 @@ export const ControlDrawerWrapper = styled.div`
         margin-top: 56px;
         height: calc(100% - 56px);
         width: 25vw;
-        overflow-x: hidden;
+        // overflow-x: hidden;
     }
 `;
 

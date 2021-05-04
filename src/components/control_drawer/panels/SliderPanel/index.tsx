@@ -1,6 +1,6 @@
-import { Slider, Typography } from '@material-ui/core';
+import { Paper, Slider, Typography } from '@material-ui/core';
 import React from 'react';
-import { SliderPanelWrapper } from './styles';
+import { StyledSliderPaper } from './styles';
 
 interface OwnProps {
     defaultValue: number;
@@ -28,7 +28,8 @@ const SliderPanel: React.FC<OwnProps> = ({
     displayText,
 }) => {
     return (
-        <SliderPanelWrapper>
+        <StyledSliderPaper elevation={1}>
+            {/* <SliderPanelWrapper> */}
             <Slider
                 defaultValue={defaultValue}
                 value={value}
@@ -36,13 +37,14 @@ const SliderPanel: React.FC<OwnProps> = ({
                 min={min}
                 max={max}
                 step={step}
-                valueLabelDisplay={valueLabelDisplay}
+                valueLabelDisplay="on"
                 aria-labelledby={labelledByID}
             ></Slider>
             <Typography id={labelledByID} gutterBottom>
                 {displayText}
             </Typography>
-        </SliderPanelWrapper>
+            {/* </SliderPanelWrapper> */}
+        </StyledSliderPaper>
     );
 };
 

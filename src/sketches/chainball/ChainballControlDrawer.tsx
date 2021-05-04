@@ -4,8 +4,8 @@ import {
     ControlDrawerWrapper,
     GridContainerWrapper,
     GridItemWrapper,
-} from 'components/ControlDrawer/styles';
-import SliderPanel from 'components/panels/SliderPanel';
+} from 'components/control_drawer/styles';
+import SliderPanel from 'components/control_drawer/panels/SliderPanel';
 import AppletInfo from 'interfaces/AppletInfo';
 import React, { useContext } from 'react';
 
@@ -54,7 +54,6 @@ const ChainballControlDrawer: React.FC<OwnProps> = ({
                                     max={500}
                                     step={5}
                                     labelledByID="ball-count-slider"
-                                    valueLabelDisplay="on"
                                     displayText="Ball Count"
                                 />
                             </Grid>
