@@ -35,7 +35,7 @@ const appletMap: Map<string, AppletInfo> = new Map([
     //     {
     //         name: 'orbiter',
     //         displayName: 'Orbiter',
-    //         version: 'v0.2s',
+    //         version: 'v0.2',
     //         description: 'Orbiter simulation',
     //         creationDate: new Date('March 8, 2020 00:00:00'),
     //     },

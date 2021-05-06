@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuBar from 'components/MenuBar';
+import { Typography } from '@material-ui/core';
 
 interface OwnProps {
     bloomVersion: string;
@@ -23,7 +24,9 @@ const Dashboard: React.FC<OwnProps> = ({
                 isControlDrawerOpen={false}
                 setIsControlDrawerOpen={() => {}}
             />
-            <p>This is the Dashboard!</p>
+            <Typography color="secondary" variant="h1">
+                {`This is the Dashboard!`}
+            </Typography>
         </>
     );
 };

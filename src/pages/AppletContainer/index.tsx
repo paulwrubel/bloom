@@ -4,6 +4,7 @@ import MenuBar from 'components/MenuBar';
 import P5Container from 'components/P5Container';
 import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
+import AppletInfo from 'interfaces/AppletInfo';
 
 interface AppletParams {
     appletName: string;
@@ -25,7 +26,7 @@ const AppletContainer: React.FC<OwnProps> = ({
     setRedirectLocation,
 }) => {
     const { appletName } = useParams<AppletParams>();
-    const appletInfo = appletMap.get(appletName);
+    const appletInfo = appletMap.get(appletName) as AppletInfo;
 
     const [isControlDrawerOpen, setIsControlDrawerOpen] = useState(true);
 
@@ -48,35 +49,26 @@ const AppletContainer: React.FC<OwnProps> = ({
                 isControlDrawerOpen={isControlDrawerOpen}
                 setIsControlDrawerOpen={setIsControlDrawerOpen}
             />
-            {appletInfo ? (
-                <div>
-                    <Grid
-                        container
-                        spacing={0}
-                        direction="row"
-                        alignItems="stretch"
-                        wrap="nowrap"
-                    >
-                        <Grid container item xs={isControlDrawerOpen ? 9 : 12}>
-                            <P5Container
-                                sketchInstance={appletInfo.sketchInstance}
-                                stateContext={appletInfo.stateContext}
-                                dispatchContext={appletInfo.dispatchContext}
-                            />
-                        </Grid>
-                        <Grid container item xs>
-                            <appletInfo.controlDrawerComponent
-                                isControlDrawerOpen={isControlDrawerOpen}
-                            />
-                        </Grid>
-                    </Grid>
-                </div>
-            ) : (
-                <p>
-                    Oh no! {appletName} doesn&apos;t seem to be a valid Applet.
-                    :(
-                </p>
-            )}
+            <Grid
+                container
+                spacing={0}
+                direction="row"
+                alignItems="stretch"
+                wrap="nowrap"
+            >
+                <Grid container item xs={isControlDrawerOpen ? 9 : 12}>
+                    <P5Container
+                        sketchInstance={appletInfo.sketchInstance}
+                        stateContext={appletInfo.stateContext}
+                        dispatchContext={appletInfo.dispatchContext}
+                    />
+                </Grid>
+                <Grid container item xs>
+                    <appletInfo.controlDrawerComponent
+                        isControlDrawerOpen={isControlDrawerOpen}
+                    />
+                </Grid>
+            </Grid>
         </>
     );
 };
