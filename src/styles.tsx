@@ -8,4 +8,6 @@ export const StyledBloom = styled.div`
     padding: 0;
     display: block;
     overflow: hidden;
+
+    background-color: #212121;
 `;

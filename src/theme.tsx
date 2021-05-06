@@ -1,6 +1,7 @@
 const defaultTheme = {
     palette: {
-        panelBackgroundColor: 'darkgrey',
+        panelBackgroundColor: '#333',
+        controlsDrawerBackgroundColor: '#212121',
     },
 };
 

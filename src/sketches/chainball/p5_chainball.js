@@ -40,7 +40,7 @@ let chainball = (p) => {
         let h = p.select('.P5Container').height;
         p.createCanvas(w, h);
         // p.createCanvas(p.windowWidth, p.windowHeight);
-        // canvas.parent('Sketch');
+        // canvas.parent('P5Container');
         // canvas.style('display', 'block');
 
         p.colorMode(p.HSB);

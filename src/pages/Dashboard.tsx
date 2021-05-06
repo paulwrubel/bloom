@@ -20,6 +20,8 @@ const Dashboard: React.FC<OwnProps> = ({
                     setShouldRedirect(true);
                     setRedirectLocation(appletName);
                 }}
+                isControlDrawerOpen={false}
+                setIsControlDrawerOpen={() => {}}
             />
             <p>This is the Dashboard!</p>
         </>

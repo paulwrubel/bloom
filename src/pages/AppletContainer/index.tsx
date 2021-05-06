@@ -45,6 +45,8 @@ const AppletContainer: React.FC<OwnProps> = ({
                         setRedirectLocation(appletName);
                     }
                 }}
+                isControlDrawerOpen={isControlDrawerOpen}
+                setIsControlDrawerOpen={setIsControlDrawerOpen}
             />
             {appletInfo ? (
                 <div>

@@ -1,4 +1,4 @@
-import { Paper, Slider, Typography } from '@material-ui/core';
+import { Slider, Typography } from '@material-ui/core';
 import React from 'react';
 import { StyledSliderPaper } from './styles';
 
@@ -23,7 +23,6 @@ const SliderPanel: React.FC<OwnProps> = ({
     min,
     max,
     step,
-    valueLabelDisplay,
     labelledByID,
     displayText,
 }) => {
@@ -40,7 +39,7 @@ const SliderPanel: React.FC<OwnProps> = ({
                 valueLabelDisplay="on"
                 aria-labelledby={labelledByID}
             ></Slider>
-            <Typography id={labelledByID} gutterBottom>
+            <Typography variant="subtitle1" id={labelledByID} gutterBottom>
                 {displayText}
             </Typography>
             {/* </SliderPanelWrapper> */}
