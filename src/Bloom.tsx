@@ -5,7 +5,7 @@ import { MuiThemeProvider, StylesProvider } from '@material-ui/core/styles';
 import { ThemeProvider } from 'styled-components';
 import theme from 'theme';
 
-const BLOOM_VERSION = 'v0.0.4';
+const BLOOM_VERSION = 'v0.0.6';
 
 const Bloom: React.FC = () => {
     return (
