@@ -26,16 +26,12 @@ const AppletReducer: React.FC<OwnProps> = ({ children }) => {
     );
 
     if (appletInfo) {
-        if (!appletInfo.dispatchContext) {
-            appletInfo.dispatchContext = createContext<
-                React.Dispatch<ActionPayload>
-            >(() => {});
-        }
-        if (!appletInfo.stateContext) {
-            appletInfo.stateContext = createContext<LooseObject>(
-                appletInfo.initialState,
-            );
-        }
+        appletInfo.dispatchContext = createContext<
+            React.Dispatch<ActionPayload>
+        >(() => {});
+        appletInfo.stateContext = createContext<LooseObject>(
+            appletInfo.initialState,
+        );
     }
 
     return (

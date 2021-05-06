@@ -10,6 +10,7 @@ export default interface AppletInfo {
     creationDate: Date;
 
     sketchInstance: (p: p5) => void;
+    // eslint-disable-next-line @typescript-eslint/ban-types
     controlDrawerComponent: React.FC<Record<string, unknown>>;
 
     initialState: LooseObject;

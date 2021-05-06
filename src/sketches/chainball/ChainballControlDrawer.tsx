@@ -5,7 +5,7 @@ import SliderPanel from 'components/panels/SliderPanel';
 import AppletInfo from 'interfaces/AppletInfo';
 import React, { useContext } from 'react';
 
-interface OwnProps {
+interface OwnProps extends Record<string, unknown> {
     isControlDrawerOpen: boolean;
 }
 
