@@ -1,4 +1,5 @@
 import appletMap from 'AppletMap';
+import { DefaultDispatchContext, DefaultStateContext } from 'DefaultContexts';
 import ActionPayload from 'interfaces/ActionPayload';
 import LooseObject from 'interfaces/LooseObject';
 import React, { createContext, useReducer } from 'react';
@@ -26,12 +27,16 @@ const AppletReducer: React.FC<OwnProps> = ({ children }) => {
     );
 
     if (appletInfo) {
-        appletInfo.dispatchContext = createContext<
-            React.Dispatch<ActionPayload>
-        >(() => {});
-        appletInfo.stateContext = createContext<LooseObject>(
-            appletInfo.initialState,
-        );
+        if (appletInfo.dispatchContext === DefaultDispatchContext) {
+            appletInfo.dispatchContext = createContext<
+                React.Dispatch<ActionPayload>
+            >(() => {});
+        }
+        if (appletInfo.stateContext === DefaultStateContext) {
+            appletInfo.stateContext = createContext<LooseObject>(
+                appletInfo.initialState,
+            );
+        }
     }
 
     return (

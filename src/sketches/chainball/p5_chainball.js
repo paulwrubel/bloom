@@ -67,9 +67,7 @@ let chainball = (p) => {
                 pos = core.position.copy();
             } else {
                 followDist = defaultFollowDistance;
-                console.log(balls.length);
                 pos = balls[balls.length - 1].position.copy();
-                console.log(pos);
             }
             balls.push({
                 radius: defaultBallRadius,

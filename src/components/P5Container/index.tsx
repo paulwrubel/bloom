@@ -14,6 +14,7 @@ function instanceOfP5WithUpdatingState(
 ): p is p5WithUpdatingStateAndDispatch {
     return 'updateState' in p;
 }
+
 interface OwnProps {
     sketchInstance: (p: p5 | p5WithUpdatingStateAndDispatch) => void;
     stateContext: React.Context<LooseObject>;
