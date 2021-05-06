@@ -1,5 +1,6 @@
 import appletMap from 'AppletMap';
 import ControlDrawer from 'components/ControlDrawer';
+import RadioButtonsPanel from 'components/panels/RadioButtonsPanel';
 import SliderPanel from 'components/panels/SliderPanel';
 import AppletInfo from 'interfaces/AppletInfo';
 import React, { useContext } from 'react';
@@ -18,6 +19,28 @@ const ChainballControlDrawer: React.FC<OwnProps> = ({
 
     return (
         <ControlDrawer isControlDrawerOpen={isControlDrawerOpen}>
+            <RadioButtonsPanel
+                name="mode"
+                label="Mode"
+                value={state.mode}
+                onChange={(_, newValue: string) => {
+                    dispatch({
+                        action: 'SetMode',
+                        payload: newValue,
+                    });
+                }}
+                buttons={[
+                    {
+                        isDefault: true,
+                        value: 'static',
+                        label: 'Static',
+                    },
+                    {
+                        value: 'dynamic',
+                        label: 'Dynamic',
+                    },
+                ]}
+            />
             <SliderPanel
                 defaultValue={state.ballCount}
                 value={state.ballCount}
@@ -48,6 +71,42 @@ const ChainballControlDrawer: React.FC<OwnProps> = ({
                 labelledByID="link-length-slider"
                 displayText="Link Length"
             />
+            {state.mode === 'dynamic' && (
+                <SliderPanel
+                    defaultValue={state.linkTension}
+                    value={state.linkTension}
+                    onChange={(_, newValue: number | number[]) =>
+                        dispatch({
+                            action: 'SetLinkTension',
+                            payload: newValue,
+                        })
+                    }
+                    min={0.0}
+                    max={1.0}
+                    step={0.02}
+                    labelledByID="link-tension-slider"
+                    valueLabelFormat={(value) => `${(value * 100).toFixed(0)}%`}
+                    displayText="Link Tension"
+                />
+            )}
+            {state.mode === 'dynamic' && (
+                <SliderPanel
+                    defaultValue={state.linkDamping}
+                    value={state.linkDamping}
+                    onChange={(_, newValue: number | number[]) =>
+                        dispatch({
+                            action: 'SetLinkDamping',
+                            payload: newValue,
+                        })
+                    }
+                    min={0.0}
+                    max={1.0}
+                    step={0.02}
+                    labelledByID="link-damping-slider"
+                    valueLabelFormat={(value) => `${(value * 100).toFixed(0)}%`}
+                    displayText="Link Damping"
+                />
+            )}
         </ControlDrawer>
     );
 };

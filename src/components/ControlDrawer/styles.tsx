@@ -11,7 +11,7 @@ export const StyledControlDrawer = styled(Drawer)`
         overflow-x: hidden;
 
         background-color: ${(props) =>
-            props.theme.palette.controlsDrawerBackgroundColor};
+            props.theme.custom.controlDrawer.backgroundColor};
     }
 
     .MuiPaper-root {

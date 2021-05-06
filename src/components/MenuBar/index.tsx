@@ -18,7 +18,6 @@ import {
     SpaceBox,
     StyledToolbar,
     AppletBoxWrapper,
-    ColorWhiteWrapper,
     ExpandingFlexWrapper,
 } from './styles';
 import AppletList from 'components/AppletList';
@@ -93,9 +92,7 @@ const MenuBar: React.FC<OwnProps> = ({
                                                     )
                                                 }
                                             >
-                                                <ColorWhiteWrapper>
-                                                    <ArrowForwardIcon />
-                                                </ColorWhiteWrapper>
+                                                <ArrowForwardIcon />
                                             </IconButton>
                                         </Tooltip>
                                     ) : (
@@ -108,9 +105,7 @@ const MenuBar: React.FC<OwnProps> = ({
                                                     setIsControlDrawerOpen(true)
                                                 }
                                             >
-                                                <ColorWhiteWrapper>
-                                                    <ArrowBackIcon />
-                                                </ColorWhiteWrapper>
+                                                <ArrowBackIcon />
                                             </IconButton>
                                         </Tooltip>
                                     )}

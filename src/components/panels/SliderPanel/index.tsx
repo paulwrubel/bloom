@@ -15,6 +15,9 @@ interface OwnProps {
     valueLabelDisplay?: 'on' | 'off' | 'auto';
     labelledByID?: string;
     displayText: string;
+    valueLabelFormat?:
+        | string
+        | ((value: number, index: number) => React.ReactNode);
 }
 const SliderPanel: React.FC<OwnProps> = ({
     defaultValue,
@@ -25,6 +28,7 @@ const SliderPanel: React.FC<OwnProps> = ({
     step,
     labelledByID,
     displayText,
+    valueLabelFormat,
 }) => {
     return (
         <StyledSliderPaper elevation={1}>
@@ -37,6 +41,7 @@ const SliderPanel: React.FC<OwnProps> = ({
                 max={max}
                 step={step}
                 valueLabelDisplay="on"
+                valueLabelFormat={valueLabelFormat}
                 aria-labelledby={labelledByID}
             ></Slider>
             <Typography variant="subtitle1" id={labelledByID} gutterBottom>

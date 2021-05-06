@@ -440,8 +440,11 @@ let chainball = (p) => {
         );
     };
 
-    p.updateState = ({ ballCount, linkLength }) => {
+    p.updateState = ({ mode, ballCount, linkLength, linkTension, linkDamping }) => {
         if (didSetup) {
+            if (typeof mode !== 'undefined') {
+                currentMode = mode;
+            }
             if (
                 typeof ballCount !== 'undefined' &&
                 balls.length !== ballCount
@@ -454,44 +457,18 @@ let chainball = (p) => {
             ) {
                 p.setFollowDistance(linkLength);
             }
-        }
-    };
-
-    p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
-        if (didSetup) {
-            if (typeof newProps.mode !== 'undefined') {
-                currentMode = newProps.mode;
+            if (
+                typeof linkTension !== 'undefined' &&
+                tension !== linkTension
+            ) {
+                tension = linkTension;
             }
             if (
-                typeof newProps.ballCount !== 'undefined' &&
-                balls.length !== newProps.ballCount
+                typeof linkDamping !== 'undefined' &&
+                damping !== linkDamping
             ) {
-                p.setBallCount(newProps.ballCount);
+                damping = linkDamping;
             }
-            if (
-                typeof newProps.linkLength !== 'undefined' &&
-                defaultFollowDistance !== newProps.linkLength
-            ) {
-                p.setFollowDistance(newProps.linkLength);
-            }
-            if (
-                typeof newProps.linkTension !== 'undefined' &&
-                tension !== newProps.linkTension
-            ) {
-                tension = newProps.linkTension;
-            }
-            if (
-                typeof newProps.linkDamping !== 'undefined' &&
-                damping !== newProps.linkDamping
-            ) {
-                damping = newProps.linkDamping;
-            }
-        }
-        if (typeof newProps.onFrameRateChange !== 'undefined') {
-            frameRateCallback = newProps.onFrameRateChange;
-        }
-        if (typeof newProps.onCoreSpeedChange !== 'undefined') {
-            coreSpeedCallback = newProps.onCoreSpeedChange;
         }
     };
 };
