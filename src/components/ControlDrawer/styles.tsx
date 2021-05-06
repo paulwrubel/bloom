@@ -22,7 +22,3 @@ export const StyledControlDrawer = styled(Drawer)`
 export const GridContainerWrapper = styled.div`
     padding 5px;
 `;
-
-export const GridItemWrapper = styled.div`
-    padding 5px;
-`;
