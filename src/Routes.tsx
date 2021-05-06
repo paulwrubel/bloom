@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { Switch, Route } from 'react-router';
+import { Switch, Route, Redirect } from 'react-router';
 import Dashboard from 'pages/Dashboard';
 import AppletContainer from 'pages/AppletContainer';
 import AppletReducer from 'components/AppletReducer';
@@ -23,7 +23,10 @@ const Routes: React.FC<OwnProps> = ({ bloomVersion }) => {
                         setRedirectLocation={setRedirectLocation}
                     />
                 </Route>
-                <Route exact path="/:appletName">
+                <Route exact path="/a">
+                    <Redirect to="/" />
+                </Route>
+                <Route exact path="/a/:appletName">
                     <AppletReducer>
                         <AppletContainer
                             bloomVersion={bloomVersion}
@@ -34,6 +37,7 @@ const Routes: React.FC<OwnProps> = ({ bloomVersion }) => {
                         />
                     </AppletReducer>
                 </Route>
+                <Redirect from="/:appletName" to="/a/:appletName" />
             </Switch>
         </BrowserRouter>
     );
