@@ -1,8 +1,10 @@
-import appletMap from 'AppletMap';
+import {
+    AppletDispatchContext,
+    AppletStateContext,
+} from 'components/AppletReducer';
 import ControlDrawer from 'components/ControlDrawer';
 import RadioButtonsPanel from 'components/panels/RadioButtonsPanel';
 import SliderPanel from 'components/panels/SliderPanel';
-import AppletInfo from 'interfaces/AppletInfo';
 import React, { useContext } from 'react';
 
 interface OwnProps extends Record<string, unknown> {
@@ -12,10 +14,8 @@ interface OwnProps extends Record<string, unknown> {
 const ChainballControlDrawer: React.FC<OwnProps> = ({
     isControlDrawerOpen,
 }) => {
-    const chainballInfo: AppletInfo = appletMap.get('chainball') as AppletInfo;
-
-    const state = useContext(chainballInfo.stateContext);
-    const dispatch = useContext(chainballInfo.dispatchContext);
+    const state = useContext(AppletStateContext).chainball;
+    const dispatch = useContext(AppletDispatchContext);
 
     return (
         <ControlDrawer isControlDrawerOpen={isControlDrawerOpen}>
@@ -25,6 +25,7 @@ const ChainballControlDrawer: React.FC<OwnProps> = ({
                 value={state.mode}
                 onChange={(_, newValue: string) => {
                     dispatch({
+                        applet: 'chainball',
                         action: 'SetMode',
                         payload: newValue,
                     });
@@ -46,6 +47,7 @@ const ChainballControlDrawer: React.FC<OwnProps> = ({
                 value={state.ballCount}
                 onChange={(_, newValue: number | number[]) =>
                     dispatch({
+                        applet: 'chainball',
                         action: 'SetBallCount',
                         payload: newValue,
                     })
@@ -61,6 +63,7 @@ const ChainballControlDrawer: React.FC<OwnProps> = ({
                 value={state.linkLength}
                 onChange={(_, newValue: number | number[]) =>
                     dispatch({
+                        applet: 'chainball',
                         action: 'SetLinkLength',
                         payload: newValue,
                     })
@@ -77,6 +80,7 @@ const ChainballControlDrawer: React.FC<OwnProps> = ({
                     value={state.linkTension}
                     onChange={(_, newValue: number | number[]) =>
                         dispatch({
+                            applet: 'chainball',
                             action: 'SetLinkTension',
                             payload: newValue,
                         })
@@ -95,6 +99,7 @@ const ChainballControlDrawer: React.FC<OwnProps> = ({
                     value={state.linkDamping}
                     onChange={(_, newValue: number | number[]) =>
                         dispatch({
+                            applet: 'chainball',
                             action: 'SetLinkDamping',
                             payload: newValue,
                         })

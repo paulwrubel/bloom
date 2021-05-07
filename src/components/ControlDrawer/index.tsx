@@ -4,7 +4,7 @@ import React from 'react';
 import { GridContainerWrapper, StyledControlDrawer } from './styles';
 
 interface OwnProps {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 
     isControlDrawerOpen: boolean;
 }

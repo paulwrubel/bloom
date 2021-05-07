@@ -13,21 +13,13 @@ interface OwnProps {
     setRedirectLocation: (redirectLocation: string) => void;
 }
 
-const InvalidApplet: React.FC<OwnProps> = ({
-    bloomVersion,
-    setShouldRedirect,
-    setRedirectLocation,
-}) => {
+const InvalidApplet: React.FC<OwnProps> = ({ bloomVersion }) => {
     const { invalidAppletName } = useParams<InvalidAppletParams>();
 
     return (
         <>
             <MenuBar
                 bloomVersion={bloomVersion}
-                setSelectedApplet={(appletName: string) => {
-                    setShouldRedirect(true);
-                    setRedirectLocation(appletName);
-                }}
                 isControlDrawerOpen={false}
                 setIsControlDrawerOpen={() => {}}
             />

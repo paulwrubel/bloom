@@ -15,6 +15,4 @@ export default interface AppletInfo {
 
     initialState: LooseObject;
     reducer: (state: LooseObject, actionPayload: ActionPayload) => LooseObject;
-    stateContext: React.Context<LooseObject>;
-    dispatchContext: React.Context<React.Dispatch<ActionPayload>>;
 }

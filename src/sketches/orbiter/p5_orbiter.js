@@ -33,8 +33,8 @@ let orbiter = (p) => {
     // let didSetup = false;
 
     p.setup = function () {
-        let w = p.select(".SketchContainer").width;// - p.select(".Sidebar").width;
-        let h = p.select(".SketchContainer").height;
+        let w = p.select(".P5Container").width;// - p.select(".Sidebar").width;
+        let h = p.select(".P5Container").height;
         p.createCanvas(w, h);
 
         sunLocation = p.createVector(p.width / 2, p.height / 2);
@@ -113,14 +113,14 @@ let orbiter = (p) => {
     };
 
     p.resize = function () {
-        let w = p.select(".SketchContainer").width;// - p.select(".Sidebar").width;
-        let h = p.select(".SketchContainer").height;
+        let w = p.select(".P5Container").width;// - p.select(".Sidebar").width;
+        let h = p.select(".P5Container").height;
         p.resizeCanvas(w, h);
     }
 
     p.checkResize = function () {
-        let w = p.select(".SketchContainer").width;// - p.select(".Sidebar").width;
-        let h = p.select(".SketchContainer").height;
+        let w = p.select(".P5Container").width;// - p.select(".Sidebar").width;
+        let h = p.select(".P5Container").height;
         if (w !== p.width || h !== p.height) {
             p.resize();
         }
@@ -162,23 +162,6 @@ let orbiter = (p) => {
         let dy = p.abs(circleLoc.y - p.mouseY);
         let distToCircleCenter = p.sqrt(dx * dx + dy * dy);
         return distToCircleCenter <= circleRadius;
-    };
-
-    p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
-        // if (didSetup) {
-        //     if (typeof newProps.mode !== "undefined") {
-        //         currentMode = newProps.mode;
-        //     }
-        // }
-        if (typeof newProps.onFrameRateChange !== "undefined") {
-            frameRateCallback = newProps.onFrameRateChange;
-        }
-        if (typeof newProps.onPlanetSpeedChange !== "undefined") {
-            planetSpeedCallback = newProps.onPlanetSpeedChange;
-        }
-        if (typeof newProps.onMoonSpeedChange !== "undefined") {
-            moonSpeedCallback = newProps.onMoonSpeedChange;
-        }
     };
 }
 

@@ -1,4 +1,4 @@
-import { Redirect, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import appletMap from 'AppletMap';
 import MenuBar from 'components/MenuBar';
 import P5Container from 'components/P5Container';
@@ -18,34 +18,17 @@ interface OwnProps {
     setRedirectLocation: (redirectLocation: string) => void;
 }
 
-const AppletContainer: React.FC<OwnProps> = ({
-    bloomVersion,
-    shouldRedirect,
-    setShouldRedirect,
-    redirectLocation,
-    setRedirectLocation,
-}) => {
+const AppletContainer: React.FC<OwnProps> = ({ bloomVersion }) => {
     const { appletName } = useParams<AppletParams>();
     const appletInfo = appletMap.get(appletName) as AppletInfo;
 
     const [isControlDrawerOpen, setIsControlDrawerOpen] = useState(true);
-
-    if (shouldRedirect) {
-        setShouldRedirect(false);
-        return <Redirect to={`/${redirectLocation}`} />;
-    }
 
     return (
         <>
             <MenuBar
                 bloomVersion={bloomVersion}
                 appletInfo={appletInfo}
-                setSelectedApplet={(appletName: string) => {
-                    if (!appletInfo || appletName !== appletInfo.name) {
-                        setShouldRedirect(true);
-                        setRedirectLocation(appletName);
-                    }
-                }}
                 isControlDrawerOpen={isControlDrawerOpen}
                 setIsControlDrawerOpen={setIsControlDrawerOpen}
             />
@@ -59,8 +42,7 @@ const AppletContainer: React.FC<OwnProps> = ({
                 <Grid container item xs={isControlDrawerOpen ? 9 : 12}>
                     <P5Container
                         sketchInstance={appletInfo.sketchInstance}
-                        stateContext={appletInfo.stateContext}
-                        dispatchContext={appletInfo.dispatchContext}
+                        appletInfo={appletInfo}
                     />
                 </Grid>
                 <Grid container item xs>

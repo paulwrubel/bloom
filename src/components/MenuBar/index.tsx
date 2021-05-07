@@ -25,7 +25,6 @@ import AppletList from 'components/AppletList';
 interface OwnProps {
     appletInfo?: AppletInfo;
     bloomVersion: string;
-    setSelectedApplet: (appletName: string) => void;
     isControlDrawerOpen: boolean;
     setIsControlDrawerOpen: (newValue: boolean) => void;
 }
@@ -33,7 +32,6 @@ interface OwnProps {
 const MenuBar: React.FC<OwnProps> = ({
     appletInfo,
     bloomVersion,
-    setSelectedApplet,
     isControlDrawerOpen,
     setIsControlDrawerOpen,
 }) => {
@@ -120,10 +118,7 @@ const MenuBar: React.FC<OwnProps> = ({
                 onClose={() => setIsMenuDrawerOpen(false)}
                 anchor="left"
             >
-                <AppletList
-                    setIsMenuDrawerOpen={setIsMenuDrawerOpen}
-                    setSelectedApplet={setSelectedApplet}
-                />
+                <AppletList setIsMenuDrawerOpen={setIsMenuDrawerOpen} />
             </Drawer>
         </>
     );

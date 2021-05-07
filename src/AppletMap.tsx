@@ -7,7 +7,13 @@ import {
     chainballInitialState,
     chainballReducer,
 } from 'sketches/chainball/chainballReducer';
-import { DefaultDispatchContext, DefaultStateContext } from 'DefaultContexts';
+
+import OrbiterControlDrawer from 'sketches/orbiter/OrbiterControlDrawer';
+import p5_orbiter from 'sketches/orbiter/p5_orbiter';
+import {
+    orbiterInitialState,
+    orbiterReducer,
+} from 'sketches/orbiter/orbiterReducer';
 
 const appletMap: Map<string, AppletInfo> = new Map([
     [
@@ -26,20 +32,26 @@ const appletMap: Map<string, AppletInfo> = new Map([
 
             initialState: chainballInitialState,
             reducer: chainballReducer,
-            stateContext: DefaultStateContext,
-            dispatchContext: DefaultDispatchContext,
         },
     ],
-    // [
-    //     'orbiter',
-    //     {
-    //         name: 'orbiter',
-    //         displayName: 'Orbiter',
-    //         version: 'v0.2',
-    //         description: 'Orbiter simulation',
-    //         creationDate: new Date('March 8, 2020 00:00:00'),
-    //     },
-    // ],
+    [
+        'orbiter',
+        {
+            name: 'orbiter',
+            displayName: 'Orbiter',
+            version: 'v0.2',
+            description: 'Orbiter simulation',
+            creationDate: new Date('March 8, 2020 00:00:00'),
+
+            sketchInstance: p5_orbiter,
+            controlDrawerComponent: OrbiterControlDrawer as React.FC<
+                Record<string, unknown>
+            >,
+
+            initialState: orbiterInitialState,
+            reducer: orbiterReducer,
+        },
+    ],
     // [
     //     'interactivehistogram',
     //     {

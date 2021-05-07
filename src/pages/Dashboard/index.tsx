@@ -8,19 +8,11 @@ interface OwnProps {
     setRedirectLocation: (redirectLocation: string) => void;
 }
 
-const Dashboard: React.FC<OwnProps> = ({
-    bloomVersion,
-    setShouldRedirect,
-    setRedirectLocation,
-}) => {
+const Dashboard: React.FC<OwnProps> = ({ bloomVersion }) => {
     return (
         <>
             <MenuBar
                 bloomVersion={bloomVersion}
-                setSelectedApplet={(appletName: string) => {
-                    setShouldRedirect(true);
-                    setRedirectLocation(appletName);
-                }}
                 isControlDrawerOpen={false}
                 setIsControlDrawerOpen={() => {}}
             />
