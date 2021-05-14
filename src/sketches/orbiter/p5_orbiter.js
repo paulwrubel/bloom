@@ -96,15 +96,18 @@ let orbiter = (p) => {
         }
 
         if (p.frameCount % 10 === 0) {
-            if (typeof frameRateCallback !== "undefined") {
-                frameRateCallback(displayFrameRate.toFixed(0));
-            }
-            if (typeof planetSpeedCallback !== "undefined") {
-                planetSpeedCallback((planetOrbitSpeedMod * planetOrbitSpeed).toFixed(2));
-            }
-            if (typeof moonSpeedCallback !== "undefined") {
-                moonSpeedCallback((moonOrbitSpeedMod * moonOrbitSpeed).toFixed(2));
-            }
+            p.dispatch({
+                action: "UpdateFrameRate",
+                payload: displayFrameRate,
+            });
+            p.dispatch({
+                action: "UpdatePlanetSpeed",
+                payload: planetOrbitSpeedMod * planetOrbitSpeed,
+            });
+            p.dispatch({
+                action: "UpdateMoonSpeed",
+                payload: moonOrbitSpeedMod * moonOrbitSpeed,
+            });
         }
     };
 

@@ -10,12 +10,7 @@ export const StyledControlDrawer = styled(Drawer)`
         width: 25vw;
         overflow-x: hidden;
 
-        background-color: ${(props) =>
-            props.theme.custom.controlDrawer.backgroundColor};
-    }
-
-    .MuiPaper-root {
-        color: white;
+        background-color: ${(props) => props.theme.custom.palette.darkGrey};
     }
 `;
 

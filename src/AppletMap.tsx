@@ -23,7 +23,9 @@ const appletMap: Map<string, AppletInfo> = new Map([
             displayName: 'Chainball',
             version: 'v1.0',
             description: '2D kinematic demonstration',
+            tags: ['physics', 'simulation'],
             creationDate: new Date('February 9, 2020 00:00:00'),
+            // cardImagePath: 'sketches/chainball/cardImage.jpg',
 
             sketchInstance: p5_chainball,
             controlDrawerComponent: ChainballControlDrawer as React.FC<
@@ -41,7 +43,9 @@ const appletMap: Map<string, AppletInfo> = new Map([
             displayName: 'Orbiter',
             version: 'v0.2',
             description: 'Orbiter simulation',
+            tags: ['simple', 'simulation'],
             creationDate: new Date('March 8, 2020 00:00:00'),
+            // cardImagePath: 'sketches/chainball/cardImage.jpg',
 
             sketchInstance: p5_orbiter,
             controlDrawerComponent: OrbiterControlDrawer as React.FC<

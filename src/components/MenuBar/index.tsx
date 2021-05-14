@@ -1,10 +1,4 @@
-import {
-    AppBar,
-    Drawer,
-    IconButton,
-    Tooltip,
-    Typography,
-} from '@material-ui/core';
+import { AppBar, IconButton, Tooltip, Typography } from '@material-ui/core';
 import {
     Menu as MenuIcon,
     ArrowBack as ArrowBackIcon,
@@ -19,6 +13,7 @@ import {
     StyledToolbar,
     AppletBoxWrapper,
     ExpandingFlexWrapper,
+    StyledDrawer,
 } from './styles';
 import AppletList from 'components/AppletList';
 
@@ -113,13 +108,13 @@ const MenuBar: React.FC<OwnProps> = ({
                     </StyledToolbar>
                 </AppBar>
             </AppBarWrapper>
-            <Drawer
+            <StyledDrawer
                 open={isMenuDrawerOpen}
                 onClose={() => setIsMenuDrawerOpen(false)}
                 anchor="left"
             >
                 <AppletList setIsMenuDrawerOpen={setIsMenuDrawerOpen} />
-            </Drawer>
+            </StyledDrawer>
         </>
     );
 };

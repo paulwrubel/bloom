@@ -3,8 +3,7 @@ import styled from 'styled-components';
 
 export const StyledSliderPaper = styled(Paper)`
     padding 45px 25px 5px 25px;
-    background-color: ${(props) =>
-        props.theme.custom.controlPanel.backgroundColor};
+    background-color: ${(props) => props.theme.custom.palette.lightGrey};
 `;
 
 // export const SliderPanelWrapper = styled.div`

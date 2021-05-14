@@ -255,13 +255,18 @@ let chainball = (p) => {
 
         // callbacks
         if (p.frameCount % 10 === 0) {
-            if (typeof frameRateCallback !== 'undefined') {
-                frameRateCallback(displayFrameRate.toFixed(0));
-            }
-            if (typeof coreSpeedCallback !== 'undefined') {
-                coreSpeedCallback(core.velocity.mag().toFixed(2));
-            }
+            p.dispatch({
+                action: 'UpdateFrameRate',
+                payload: displayFrameRate,
+            });
+            p.dispatch({
+                action: 'UpdateCoreSpeed',
+                payload: core.velocity.mag(),
+            });
         }
+
+
+
         // $('#framerate').text(`FPS: ${displayFrameRate.toFixed(0)}`);
         // p.textSize(32);
         // p.fill(p.color(0, 0, 100));
@@ -440,31 +445,19 @@ let chainball = (p) => {
 
     p.updateState = ({ mode, ballCount, linkLength, linkTension, linkDamping }) => {
         if (didSetup) {
-            if (typeof mode !== 'undefined') {
+            if (currentMode !== mode) {
                 currentMode = mode;
             }
-            if (
-                typeof ballCount !== 'undefined' &&
-                balls.length !== ballCount
-            ) {
+            if (balls.length !== ballCount) {
                 p.setBallCount(ballCount);
             }
-            if (
-                typeof linkLength !== 'undefined' &&
-                defaultFollowDistance !== linkLength
-            ) {
+            if (defaultFollowDistance !== linkLength) {
                 p.setFollowDistance(linkLength);
             }
-            if (
-                typeof linkTension !== 'undefined' &&
-                tension !== linkTension
-            ) {
+            if (tension !== linkTension) {
                 tension = linkTension;
             }
-            if (
-                typeof linkDamping !== 'undefined' &&
-                damping !== linkDamping
-            ) {
+            if (damping !== linkDamping) {
                 damping = linkDamping;
             }
         }

@@ -7,7 +7,9 @@ export default interface AppletInfo {
     displayName: string;
     version: string;
     description: string;
+    tags: string[];
     creationDate: Date;
+    cardImagePath?: string;
 
     sketchInstance: (p: p5) => void;
     // eslint-disable-next-line @typescript-eslint/ban-types

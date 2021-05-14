@@ -24,8 +24,6 @@ const AppletReducer: React.FC<OwnProps> = ({ children }) => {
     const { appletName } = useParams<AppletParams>();
     const appletInfo = appletMap.get(appletName);
 
-    console.log(appletName);
-
     const [state, dispatch] = useReducer(appletReducer, appletInitialState);
 
     // const [state, dispatch] = useReducer(

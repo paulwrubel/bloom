@@ -122,8 +122,8 @@ const artgenerator5 = (p) => {
     // helpers
 
     p.drawImageBackground = () => {
-        for (let x=0; x<image.width; x++) {
-            for (let y=0; y<image.height; y++) {
+        for (let x = 0; x < image.width; x++) {
+            for (let y = 0; y < image.height; y++) {
                 image.set(x, y, IMAGE_BACKGROUND_COLOR);
             }
         }
@@ -431,9 +431,9 @@ const artgenerator5 = (p) => {
         let imageLocation = p.getLocationOnImage(mouseVector);
 
         return (
-            imageLocation.x >= 0 && 
-            imageLocation.x < image.width && 
-            imageLocation.y >= 0 && 
+            imageLocation.x >= 0 &&
+            imageLocation.x < image.width &&
+            imageLocation.y >= 0 &&
             imageLocation.y < image.height);
     }
 

@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-identical-functions */
 import LooseObject from 'interfaces/LooseObject';
 import p5 from 'p5';
 import React, { useContext, useEffect, useRef } from 'react';
@@ -8,20 +9,30 @@ import {
 } from 'components/AppletReducer';
 import AppletActionPayload from 'interfaces/AppletActionPayload';
 import AppletInfo from 'interfaces/AppletInfo';
+import ActionPayload from 'interfaces/ActionPayload';
 
-interface p5WithUpdatingStateAndDispatch extends p5 {
-    dispatch?: React.Dispatch<AppletActionPayload>;
+interface p5WithUpdateState extends p5 {
     updateState(state: LooseObject): void;
 }
 
-function instanceOfP5WithUpdatingState(
-    p: p5 | p5WithUpdatingStateAndDispatch,
-): p is p5WithUpdatingStateAndDispatch {
+function instanceOfP5WithUpdateState(
+    p: p5 | p5WithUpdateState | p5WithDispatch,
+): p is p5WithUpdateState {
     return 'updateState' in p;
 }
 
+interface p5WithDispatch extends p5 {
+    dispatch?: React.Dispatch<AppletActionPayload>;
+}
+
+function instanceOfP5WithDispatch(
+    p: p5 | p5WithUpdateState | p5WithDispatch,
+): p is p5WithDispatch {
+    return true;
+}
+
 interface OwnProps {
-    sketchInstance: (p: p5 | p5WithUpdatingStateAndDispatch) => void;
+    sketchInstance: (p: p5 | p5WithUpdateState | p5WithDispatch) => void;
     appletInfo: AppletInfo;
 }
 
@@ -34,12 +45,18 @@ const P5Container: React.FC<OwnProps> = ({ sketchInstance, appletInfo }) => {
     const sketchRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (
-            sketchCanvas !== null &&
-            instanceOfP5WithUpdatingState(sketchCanvas)
-        ) {
-            sketchCanvas.dispatch = dispatch;
-            sketchCanvas.updateState(state[appletInfo.name]);
+        if (sketchCanvas !== null) {
+            if (instanceOfP5WithDispatch(sketchCanvas)) {
+                sketchCanvas.dispatch = (actionPayload: ActionPayload) => {
+                    dispatch({
+                        ...actionPayload,
+                        applet: appletInfo.name,
+                    });
+                };
+            }
+            if (instanceOfP5WithUpdateState(sketchCanvas)) {
+                sketchCanvas.updateState(state[appletInfo.name]);
+            }
         }
     }, [state, dispatch]);
 
@@ -49,8 +66,15 @@ const P5Container: React.FC<OwnProps> = ({ sketchInstance, appletInfo }) => {
             // @ts-ignore
             sketchCanvas = new p5(sketchInstance, sketchRef.current);
         }
-        if (instanceOfP5WithUpdatingState(sketchCanvas)) {
-            sketchCanvas.dispatch = dispatch;
+        if (instanceOfP5WithDispatch(sketchCanvas)) {
+            sketchCanvas.dispatch = (actionPayload: ActionPayload) => {
+                dispatch({
+                    ...actionPayload,
+                    applet: appletInfo.name,
+                });
+            };
+        }
+        if (instanceOfP5WithUpdateState(sketchCanvas)) {
             sketchCanvas.updateState(state[appletInfo.name]);
         }
         return () => {

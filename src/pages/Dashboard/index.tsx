@@ -1,6 +1,9 @@
 import React from 'react';
 import MenuBar from 'components/MenuBar';
-import { Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import AppletCard from 'components/AppletCard';
+import appletMap from 'AppletMap';
+import { CardGridWrapper } from './styles';
 
 interface OwnProps {
     bloomVersion: string;
@@ -16,9 +19,18 @@ const Dashboard: React.FC<OwnProps> = ({ bloomVersion }) => {
                 isControlDrawerOpen={false}
                 setIsControlDrawerOpen={() => {}}
             />
-            <Typography color="secondary" variant="h1">
-                {`This is the Dashboard!`}
-            </Typography>
+            <CardGridWrapper>
+                <Grid container spacing={2}>
+                    {Array.from(appletMap.values()).map((appletInfo) => {
+                        return (
+                            <AppletCard
+                                key={appletInfo.name}
+                                appletInfo={appletInfo}
+                            ></AppletCard>
+                        );
+                    })}
+                </Grid>
+            </CardGridWrapper>
         </>
     );
 };

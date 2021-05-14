@@ -7,9 +7,8 @@ import { orbiterInitialState } from './orbiter/orbiterReducer';
 
 export const appletReducer: (
     state: LooseObject,
-    actionPayload: AppletActionPayload,
+    appletActionPayload: AppletActionPayload,
 ) => LooseObject = (state, { applet, action, payload }) => {
-    // eslint-disable-next-line sonarjs/no-small-switch
     if (appletMap.has(applet)) {
         const newAppletState = (appletMap.get(applet) as AppletInfo).reducer(
             state[applet],
@@ -22,7 +21,7 @@ export const appletReducer: (
         newState[applet] = newAppletState;
         return newState;
     } else {
-        throw new Error('invalid applet in applet reducer');
+        throw new Error('invalid applet in applet reducer: ' + applet);
     }
 };
 

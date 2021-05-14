@@ -2,6 +2,9 @@ import ActionPayload from 'interfaces/ActionPayload';
 import LooseObject from 'interfaces/LooseObject';
 
 enum Action {
+    UpdateFrameRate = 'UpdateFrameRate',
+    UpdateCoreSpeed = 'UpdateCoreSpeed',
+
     SetMode = 'SetMode',
     SetBallCount = 'SetBallCount',
     SetLinkLength = 'SetLinkLength',
@@ -14,6 +17,16 @@ export const chainballReducer: (
     actionPayload: ActionPayload,
 ) => LooseObject = (state, { action, payload }) => {
     switch (action) {
+        case Action.UpdateFrameRate:
+            return {
+                ...state,
+                frameRate: payload,
+            };
+        case Action.UpdateCoreSpeed:
+            return {
+                ...state,
+                coreSpeed: payload,
+            };
         case Action.SetMode:
             return {
                 ...state,
@@ -45,6 +58,9 @@ export const chainballReducer: (
 };
 
 export const chainballInitialState: LooseObject = {
+    frameRate: 0.0,
+    coreSpeed: 0.0,
+
     mode: 'static',
     ballCount: 5,
     linkLength: 50,

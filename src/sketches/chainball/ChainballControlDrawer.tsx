@@ -1,3 +1,4 @@
+import { Divider, Typography } from '@material-ui/core';
 import {
     AppletDispatchContext,
     AppletStateContext,
@@ -19,6 +20,13 @@ const ChainballControlDrawer: React.FC<OwnProps> = ({
 
     return (
         <ControlDrawer isControlDrawerOpen={isControlDrawerOpen}>
+            <Typography color="textSecondary" variant="body1">
+                FPS: {state.frameRate.toFixed(0)}
+            </Typography>
+            <Typography color="textSecondary" variant="body1">
+                Core Speed: {state.coreSpeed.toFixed(2)}
+            </Typography>
+            <Divider variant="middle" />
             <RadioButtonsPanel
                 name="mode"
                 label="Mode"

@@ -1,4 +1,4 @@
-import { Toolbar } from '@material-ui/core';
+import { Drawer, Toolbar } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const ExpandingFlexWrapper = styled.div`
@@ -32,6 +32,12 @@ export const AppletBoxWrapper = styled.div`
     width: 25vw;
 `;
 
-export const ColorWhiteWrapper = styled.div`
-    color: white;
+export const StyledDrawer = styled(Drawer)`
+    .MuiDrawer-paper {
+        color: black;
+    }
 `;
+
+// export const ColorWhiteWrapper = styled.div`
+//     color: white;
+// `;
