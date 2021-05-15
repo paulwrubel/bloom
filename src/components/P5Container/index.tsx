@@ -10,6 +10,8 @@ import AppletActionPayload from 'interfaces/AppletActionPayload';
 import AppletInfo from 'interfaces/AppletInfo';
 import ActionPayload from 'interfaces/ActionPayload';
 
+export const P5ContainerClassName = 'P5Container';
+
 interface p5WithUpdateState extends p5 {
     updateState(state: LooseObject): void;
 }
@@ -84,7 +86,7 @@ const P5Container: React.FC<OwnProps> = ({ sketchInstance, appletInfo }) => {
     }, [sketchInstance]);
 
     return (
-        <P5ContainerWrapper className="P5Container">
+        <P5ContainerWrapper className={P5ContainerClassName}>
             <div ref={sketchRef} />
         </P5ContainerWrapper>
     );

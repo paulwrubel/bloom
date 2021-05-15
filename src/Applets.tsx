@@ -22,6 +22,13 @@ import {
     interactiveHistogramReducer,
 } from 'sketches/interactive_histogram/interactiveHistogramReducer';
 
+import p5_cubegrid from 'sketches/cubegrid/p5_cubegrid';
+import CubeGridControlDrawer from 'sketches/cubegrid/CubeGridControlDrawer';
+import {
+    cubegridInitialState,
+    cubegridReducer,
+} from 'sketches/cubegrid/cubegridReducer';
+
 const applets: AppletInfo[] = [
     {
         name: 'chainball',
@@ -74,13 +81,23 @@ const applets: AppletInfo[] = [
         initialState: interactiveHistogramInitialState,
         reducer: interactiveHistogramReducer,
     },
-    //     {
-    //         name: 'cubegrid',
-    //         displayName: 'CubeGrid',
-    //         version: 'v0.9',
-    //         description: '3D customizable grid of cubes',
-    //         creationDate: new Date('January 1, 2016 00:00:00'),
-    //     },
+    {
+        name: 'cubegrid',
+        displayName: 'CubeGrid',
+        version: 'v0.9',
+        description: '3D customizable grid of cubes',
+        tags: ['3D', 'spacial', 'interactive'],
+        creationDate: new Date('January 1, 2016 00:00:00'),
+        // cardImagePath: 'sketches/chainball/cardImage.jpg',
+
+        sketchInstance: p5_cubegrid,
+        controlDrawerComponent: CubeGridControlDrawer as React.FC<
+            Record<string, unknown>
+        >,
+
+        initialState: cubegridInitialState,
+        reducer: cubegridReducer,
+    },
     //     {
     //         name: 'trails',
     //         displayName: 'Trails',
