@@ -1,4 +1,4 @@
-import { Drawer, Toolbar } from '@material-ui/core';
+import { Toolbar } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const ExpandingFlexWrapper = styled.div`
