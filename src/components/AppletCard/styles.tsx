@@ -16,5 +16,5 @@ export const StyledCard = styled(Card)`
 `;
 
 export const StyledCardMedia = styled(CardMedia)`
-    height: 140px;
+    height: 200px;
 `;

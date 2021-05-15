@@ -29,10 +29,10 @@ const AppletCard: React.FC<OwnProps> = ({ appletInfo }) => {
                         title={appletInfo.displayName}
                         subheader={appletTagsString}
                     />
-                    {appletInfo.cardImagePath && (
+                    {appletInfo.cardImage && (
                         <StyledCardMedia
                             title={appletInfo.displayName}
-                            image={appletInfo.cardImagePath}
+                            image={appletInfo.cardImage}
                         />
                     )}
                     <CardContent>{appletInfo.description}</CardContent>

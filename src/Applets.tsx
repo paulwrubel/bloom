@@ -3,6 +3,7 @@ import AppletInfo from 'interfaces/AppletInfo';
 
 import p5_chainball from 'sketches/chainball/p5_chainball';
 import ChainballControlDrawer from 'sketches/chainball/ChainballControlDrawer';
+import chainballCardImage from 'sketches/chainball/chainballCardImage.jpg';
 import {
     chainballInitialState,
     chainballReducer,
@@ -10,6 +11,7 @@ import {
 
 import p5_orbiter from 'sketches/orbiter/p5_orbiter';
 import OrbiterControlDrawer from 'sketches/orbiter/OrbiterControlDrawer';
+import orbiterCardImage from 'sketches/orbiter/orbiterCardImage.jpg';
 import {
     orbiterInitialState,
     orbiterReducer,
@@ -17,6 +19,7 @@ import {
 
 import p5_interactivehistogram from 'sketches/interactive_histogram/p5_interactivehistogram';
 import InteractiveHistogramControlDrawer from 'sketches/interactive_histogram/InteractiveHistogramControlDrawer';
+import interactiveHistogramCardImage from 'sketches/interactive_histogram/interactiveHistogramCardImage.jpg';
 import {
     interactiveHistogramInitialState,
     interactiveHistogramReducer,
@@ -24,6 +27,7 @@ import {
 
 import p5_cubegrid from 'sketches/cubegrid/p5_cubegrid';
 import CubeGridControlDrawer from 'sketches/cubegrid/CubeGridControlDrawer';
+import cubegridCardImage from 'sketches/cubegrid/cubegridCardImage.jpg';
 import {
     cubegridInitialState,
     cubegridReducer,
@@ -34,10 +38,12 @@ const applets: AppletInfo[] = [
         name: 'chainball',
         displayName: 'Chainball',
         version: 'v1.0',
-        description: '2D kinematic demonstration',
-        tags: ['physics', 'simulation'],
+        description: `A two-dimensional physics and momentum simulation. 
+            Simplistic and satisfying, this sketch is one of the more fleshed-out ones. 
+            Being highly customizable, this one is one of my consistent favourites that I always go back to for fun.`,
+        tags: ['physics', 'simulation', 'interactive'],
         creationDate: new Date('February 9, 2020 00:00:00'),
-        // cardImagePath: 'sketches/chainball/cardImage.jpg',
+        cardImage: chainballCardImage,
 
         sketchInstance: p5_chainball,
         controlDrawerComponent: ChainballControlDrawer as React.FC<
@@ -51,10 +57,12 @@ const applets: AppletInfo[] = [
         name: 'orbiter',
         displayName: 'Orbiter',
         version: 'v0.2',
-        description: 'Orbiter simulation',
+        description: `An overly-simplistic orbital visual.
+            With no interactivity besides the star's location, this sketch remains no more than 
+            a proof-of-concept for angular positioning via mathematics.`,
         tags: ['simple', 'simulation'],
         creationDate: new Date('March 8, 2020 00:00:00'),
-        // cardImagePath: 'sketches/chainball/cardImage.jpg',
+        cardImage: orbiterCardImage,
 
         sketchInstance: p5_orbiter,
         controlDrawerComponent: OrbiterControlDrawer as React.FC<
@@ -68,10 +76,11 @@ const applets: AppletInfo[] = [
         name: 'interactive-histogram',
         displayName: 'Interactive Histogram',
         version: 'v1.0',
-        description: 'An Interactive Histogram',
+        description: `An interactive rainbow "histogram". This values are arbitrary and this sketch, being one of the first
+            I've ever created, was a simple test of reactions to mouse location and actions.`,
         tags: ['simple', 'art'],
         creationDate: new Date('January 1, 2016 00:00:00'),
-        // cardImagePath: 'sketches/chainball/cardImage.jpg',
+        cardImage: interactiveHistogramCardImage,
 
         sketchInstance: p5_interactivehistogram,
         controlDrawerComponent: InteractiveHistogramControlDrawer as React.FC<
@@ -85,10 +94,12 @@ const applets: AppletInfo[] = [
         name: 'cubegrid',
         displayName: 'CubeGrid',
         version: 'v0.9',
-        description: '3D customizable grid of cubes',
-        tags: ['3D', 'spacial', 'interactive'],
+        description: `3D grid of cubes. This sketch is a experiment with p5js's WEBGL rendering mode. This is very interactive,
+            responding to superfluous controls and mouse movements, but is prone to extremely poor performance, especially as
+            cube counts rise.`,
+        tags: ['3D', 'spacial', 'interactive', 'webgl'],
         creationDate: new Date('January 1, 2016 00:00:00'),
-        // cardImagePath: 'sketches/chainball/cardImage.jpg',
+        cardImage: cubegridCardImage,
 
         sketchInstance: p5_cubegrid,
         controlDrawerComponent: CubeGridControlDrawer as React.FC<

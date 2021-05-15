@@ -5,6 +5,7 @@ import P5Container from 'components/P5Container';
 import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
 import AppletInfo from 'interfaces/AppletInfo';
+import { StyledAppletContainer } from './styles';
 
 interface AppletParams {
     appletName: string;
@@ -27,7 +28,7 @@ const AppletContainer: React.FC<OwnProps> = ({ bloomVersion }) => {
     const [isControlDrawerOpen, setIsControlDrawerOpen] = useState(true);
 
     return (
-        <>
+        <StyledAppletContainer>
             <MenuBar
                 bloomVersion={bloomVersion}
                 appletInfo={appletInfo}
@@ -53,7 +54,7 @@ const AppletContainer: React.FC<OwnProps> = ({ bloomVersion }) => {
                     />
                 </Grid>
             </Grid>
-        </>
+        </StyledAppletContainer>
     );
 };
 

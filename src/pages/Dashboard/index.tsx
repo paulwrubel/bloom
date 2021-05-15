@@ -20,7 +20,7 @@ const Dashboard: React.FC<OwnProps> = ({ bloomVersion }) => {
                 setIsControlDrawerOpen={() => {}}
             />
             <CardGridWrapper>
-                <Grid container spacing={2}>
+                <Grid container spacing={2} justify="space-evenly">
                     {applets.map((appletInfo) => {
                         return (
                             <AppletCard
