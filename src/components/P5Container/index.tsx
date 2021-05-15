@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/no-identical-functions */
 import LooseObject from 'interfaces/LooseObject';
 import p5 from 'p5';
 import React, { useContext, useEffect, useRef } from 'react';
@@ -44,18 +43,22 @@ const P5Container: React.FC<OwnProps> = ({ sketchInstance, appletInfo }) => {
 
     const sketchRef = useRef<HTMLDivElement>(null);
 
+    const pseudoDispatch = (actionPayload: ActionPayload) => {
+        dispatch({
+            ...actionPayload,
+            applet: appletInfo.name,
+        });
+    };
+
     useEffect(() => {
         if (sketchCanvas !== null) {
             if (instanceOfP5WithDispatch(sketchCanvas)) {
-                sketchCanvas.dispatch = (actionPayload: ActionPayload) => {
-                    dispatch({
-                        ...actionPayload,
-                        applet: appletInfo.name,
-                    });
-                };
+                sketchCanvas.dispatch = pseudoDispatch;
             }
             if (instanceOfP5WithUpdateState(sketchCanvas)) {
-                sketchCanvas.updateState(state[appletInfo.name]);
+                sketchCanvas.updateState(
+                    state[appletInfo.name.replaceAll('-', '_')],
+                );
             }
         }
     }, [state, dispatch]);
@@ -67,15 +70,12 @@ const P5Container: React.FC<OwnProps> = ({ sketchInstance, appletInfo }) => {
             sketchCanvas = new p5(sketchInstance, sketchRef.current);
         }
         if (instanceOfP5WithDispatch(sketchCanvas)) {
-            sketchCanvas.dispatch = (actionPayload: ActionPayload) => {
-                dispatch({
-                    ...actionPayload,
-                    applet: appletInfo.name,
-                });
-            };
+            sketchCanvas.dispatch = pseudoDispatch;
         }
         if (instanceOfP5WithUpdateState(sketchCanvas)) {
-            sketchCanvas.updateState(state[appletInfo.name]);
+            sketchCanvas.updateState(
+                state[appletInfo.name.replaceAll('-', '_')],
+            );
         }
         return () => {
             sketchCanvas?.remove();

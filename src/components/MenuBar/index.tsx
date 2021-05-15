@@ -13,9 +13,8 @@ import {
     StyledToolbar,
     AppletBoxWrapper,
     ExpandingFlexWrapper,
-    StyledDrawer,
 } from './styles';
-import AppletList from 'components/AppletList';
+import MenuDrawer from 'components/MenuDrawer';
 
 interface OwnProps {
     appletInfo?: AppletInfo;
@@ -108,13 +107,10 @@ const MenuBar: React.FC<OwnProps> = ({
                     </StyledToolbar>
                 </AppBar>
             </AppBarWrapper>
-            <StyledDrawer
-                open={isMenuDrawerOpen}
-                onClose={() => setIsMenuDrawerOpen(false)}
-                anchor="left"
-            >
-                <AppletList setIsMenuDrawerOpen={setIsMenuDrawerOpen} />
-            </StyledDrawer>
+            <MenuDrawer
+                isMenuDrawerOpen={isMenuDrawerOpen}
+                setIsMenuDrawerOpen={setIsMenuDrawerOpen}
+            />
         </>
     );
 };

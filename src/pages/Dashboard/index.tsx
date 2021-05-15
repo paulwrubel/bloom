@@ -2,7 +2,7 @@ import React from 'react';
 import MenuBar from 'components/MenuBar';
 import { Grid } from '@material-ui/core';
 import AppletCard from 'components/AppletCard';
-import appletMap from 'AppletMap';
+import applets from 'Applets';
 import { CardGridWrapper } from './styles';
 
 interface OwnProps {
@@ -21,7 +21,7 @@ const Dashboard: React.FC<OwnProps> = ({ bloomVersion }) => {
             />
             <CardGridWrapper>
                 <Grid container spacing={2}>
-                    {Array.from(appletMap.values()).map((appletInfo) => {
+                    {applets.map((appletInfo) => {
                         return (
                             <AppletCard
                                 key={appletInfo.name}

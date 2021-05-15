@@ -32,12 +32,6 @@ export const AppletBoxWrapper = styled.div`
     width: 25vw;
 `;
 
-export const StyledDrawer = styled(Drawer)`
-    .MuiDrawer-paper {
-        color: black;
-    }
-`;
-
 // export const ColorWhiteWrapper = styled.div`
 //     color: white;
 // `;

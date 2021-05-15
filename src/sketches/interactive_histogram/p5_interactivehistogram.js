@@ -17,14 +17,11 @@ let InteractiveHistogram = (p) => {
     // Changes with '+' and '-'
     let barHeightScalar = 250;
 
-    let frameRateCallback;
-    let barHeightScalarCallback;
-
     let didSetup = false;
 
     p.setup = function () {
-        let w = p.select(".SketchContainer").width;// - p.select(".Sidebar").width;
-        let h = p.select(".SketchContainer").height;
+        let w = p.select(".P5Container").width;// - p.select(".Sidebar").width;
+        let h = p.select(".P5Container").height;
         p.createCanvas(w, h);
 
         p.colorMode(p.HSB, 360, 100, 100);
@@ -87,12 +84,10 @@ let InteractiveHistogram = (p) => {
         }
 
         if (p.frameCount % 10 === 0) {
-            if (typeof frameRateCallback !== "undefined") {
-                frameRateCallback(displayFrameRate.toFixed(0));
-            }
-            if (typeof barHeightScalarCallback !== "undefined") {
-                barHeightScalarCallback(barHeightScalar.toFixed(0));
-            }
+            p.dispatch({
+                action: 'UpdateFrameRate',
+                payload: displayFrameRate,
+            });
         }
 
     };
@@ -102,14 +97,14 @@ let InteractiveHistogram = (p) => {
     };
 
     p.resize = function () {
-        let w = p.select(".SketchContainer").width;// - p.select(".Sidebar").width;
-        let h = p.select(".SketchContainer").height;
+        let w = p.select(".P5Container").width;// - p.select(".Sidebar").width;
+        let h = p.select(".P5Container").height;
         p.resizeCanvas(w, h);
     };
 
     p.checkResize = function () {
-        let w = p.select(".SketchContainer").width;// - p.select(".Sidebar").width;
-        let h = p.select(".SketchContainer").height;
+        let w = p.select(".P5Container").width;// - p.select(".Sidebar").width;
+        let h = p.select(".P5Container").height;
         if (w !== p.width || h !== p.height) {
             p.resize();
         }
@@ -126,19 +121,12 @@ let InteractiveHistogram = (p) => {
         colored[rect] = p.height - p.mouseY < heights[rect] ? !colored[rect] : colored[rect];
     };
 
-    p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
+    p.updateState = ({ barHeightScalar: newBarHeightScalar }) => {
         if (didSetup) {
-            if (typeof newProps.barHeightScalar !== "undefined") {
-                barHeightScalar = newProps.barHeightScalar;
-                console.log(barHeightScalar)
+            if (barHeightScalar !== newBarHeightScalar) {
+                barHeightScalar = newBarHeightScalar;
             }
         }
-        if (typeof newProps.onFrameRateChange !== "undefined") {
-            frameRateCallback = newProps.onFrameRateChange;
-        }
-        // if (typeof newProps.onBarHeightScalarChange !== "undefined") {
-        //     barHeightScalarCallback = newProps.onBarHeightScalarChange;
-        // }
     };
 
 };

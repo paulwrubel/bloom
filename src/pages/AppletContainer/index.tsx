@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import appletMap from 'AppletMap';
+import applets from 'Applets';
 import MenuBar from 'components/MenuBar';
 import P5Container from 'components/P5Container';
 import React, { useState } from 'react';
@@ -20,7 +20,9 @@ interface OwnProps {
 
 const AppletContainer: React.FC<OwnProps> = ({ bloomVersion }) => {
     const { appletName } = useParams<AppletParams>();
-    const appletInfo = appletMap.get(appletName) as AppletInfo;
+    const appletInfo = applets.find(
+        (appletInfo) => appletInfo.name === appletName,
+    ) as AppletInfo;
 
     const [isControlDrawerOpen, setIsControlDrawerOpen] = useState(true);
 
