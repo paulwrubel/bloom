@@ -5,7 +5,6 @@ import {
 } from 'components/AppletReducer';
 import ControlDrawer from 'components/ControlDrawer';
 import RadioButtonsPanel from 'components/panels/RadioButtonsPanel';
-import SliderPanel from 'components/panels/SliderPanel';
 import ActionPayload from 'interfaces/ActionPayload';
 import React, { useContext } from 'react';
 
