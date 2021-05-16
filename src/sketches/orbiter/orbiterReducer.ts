@@ -9,27 +9,30 @@ enum Action {
 
 export const orbiterReducer: (
     state: LooseObject,
-    actionPayload: ActionPayload,
-) => LooseObject = (state, { action, payload }) => {
-    switch (action) {
-        case Action.UpdateFrameRate:
-            return {
-                ...state,
-                frameRate: payload,
-            };
-        case Action.UpdatePlanetSpeed:
-            return {
-                ...state,
-                planetSpeed: payload,
-            };
-        case Action.UpdateMoonSpeed:
-            return {
-                ...state,
-                moonSpeed: payload,
-            };
-        default:
-            return state;
-    }
+    actionPayloads: ActionPayload[],
+) => LooseObject = (state, actionPayloads) => {
+    actionPayloads.forEach(({ action, payload }) => {
+        switch (action) {
+            case Action.UpdateFrameRate:
+                state = {
+                    ...state,
+                    frameRate: payload,
+                };
+                break;
+            case Action.UpdatePlanetSpeed:
+                state = {
+                    ...state,
+                    planetSpeed: payload,
+                };
+                break;
+            case Action.UpdateMoonSpeed:
+                state = {
+                    ...state,
+                    moonSpeed: payload,
+                };
+                break;
+        }
+    });
     return state;
 };
 

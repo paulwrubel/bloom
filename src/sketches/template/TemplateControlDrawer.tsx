@@ -16,10 +16,10 @@ const TemplateControlDrawer: React.FC<OwnProps> = ({ isControlDrawerOpen }) => {
     const state = useContext(AppletStateContext).template;
     const dispatch = useContext(AppletDispatchContext);
 
-    const pseudoDispatch = (actionPayload: ActionPayload) =>
+    const pseudoDispatch = (actionPayloads: ActionPayload[]) =>
         dispatch({
             applet: 'template',
-            ...actionPayload,
+            actionPayloads: actionPayloads,
         });
 
     return (
@@ -37,10 +37,12 @@ const TemplateControlDrawer: React.FC<OwnProps> = ({ isControlDrawerOpen }) => {
                 defaultValue={state.sketchProperty}
                 value={state.sketchProperty}
                 onChange={(_, newValue: number | number[]) =>
-                    pseudoDispatch({
-                        action: 'SetSketchProperty',
-                        payload: newValue,
-                    })
+                    pseudoDispatch([
+                        {
+                            action: 'SetSketchProperty',
+                            payload: newValue,
+                        },
+                    ])
                 }
                 min={1}
                 max={100000}

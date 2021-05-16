@@ -12,32 +12,37 @@ enum Action {
 
 export const trailsReducer: (
     state: LooseObject,
-    actionPayload: ActionPayload,
-) => LooseObject = (state, { action, payload }) => {
-    switch (action) {
-        case Action.UpdateFrameRate:
-            return {
-                ...state,
-                frameRate: payload,
-            };
-        case Action.UpdateActiveTrailCount:
-            return {
-                ...state,
-                activeTrailCount: payload,
-            };
-        case Action.SetMode:
-            return {
-                ...state,
-                mode: payload,
-            };
-        case Action.SetClearCanvasCallback:
-            return {
-                ...state,
-                clearCanvasCallback: payload,
-            };
-        default:
-            return state;
-    }
+    actionPayloads: ActionPayload[],
+) => LooseObject = (state, actionPayloads) => {
+    actionPayloads.forEach(({ action, payload }) => {
+        switch (action) {
+            case Action.UpdateFrameRate:
+                state = {
+                    ...state,
+                    frameRate: payload,
+                };
+                break;
+            case Action.UpdateActiveTrailCount:
+                state = {
+                    ...state,
+                    activeTrailCount: payload,
+                };
+                break;
+            case Action.SetMode:
+                state = {
+                    ...state,
+                    mode: payload,
+                };
+                break;
+            case Action.SetClearCanvasCallback:
+                state = {
+                    ...state,
+                    clearCanvasCallback: payload,
+                };
+                break;
+        }
+    });
+    return state;
 };
 
 export const trailsInitialState: LooseObject = {

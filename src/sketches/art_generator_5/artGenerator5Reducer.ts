@@ -13,47 +13,55 @@ enum Action {
 
 export const artGenerator5Reducer: (
     state: LooseObject,
-    actionPayload: ActionPayload,
-) => LooseObject = (state, { action, payload }) => {
-    switch (action) {
-        case Action.UpdateFrameRate:
-            return {
-                ...state,
-                frameRate: payload,
-            };
-        case Action.UpdateImageWidth:
-            return {
-                ...state,
-                imageWidth: payload,
-            };
-        case Action.UpdateImageHeight:
-            return {
-                ...state,
-                imageHeight: payload,
-            };
-        case Action.UpdateFringePixelCount:
-            return {
-                ...state,
-                fringePixelCount: payload,
-            };
-        case Action.UpdateVisitedPixelCount:
-            return {
-                ...state,
-                visitedPixelCount: payload,
-            };
-        case Action.UpdateNorthChance:
-            return {
-                ...state,
-                northChance: payload,
-            };
-        case Action.UpdateIsGenerating:
-            return {
-                ...state,
-                isGenerating: payload,
-            };
-        default:
-            return state;
-    }
+    actionPayloads: ActionPayload[],
+) => LooseObject = (state, actionPayloads) => {
+    actionPayloads.forEach(({ action, payload }) => {
+        switch (action) {
+            case Action.UpdateFrameRate:
+                state = {
+                    ...state,
+                    frameRate: payload,
+                };
+                break;
+            case Action.UpdateImageWidth:
+                state = {
+                    ...state,
+                    imageWidth: payload,
+                };
+                break;
+            case Action.UpdateImageHeight:
+                state = {
+                    ...state,
+                    imageHeight: payload,
+                };
+                break;
+            case Action.UpdateFringePixelCount:
+                state = {
+                    ...state,
+                    fringePixelCount: payload,
+                };
+                break;
+            case Action.UpdateVisitedPixelCount:
+                state = {
+                    ...state,
+                    visitedPixelCount: payload,
+                };
+                break;
+            case Action.UpdateNorthChance:
+                state = {
+                    ...state,
+                    northChance: payload,
+                };
+                break;
+            case Action.UpdateIsGenerating:
+                state = {
+                    ...state,
+                    isGenerating: payload,
+                };
+                break;
+        }
+    });
+    return state;
 };
 
 export const artGenerator5InitialState: LooseObject = {

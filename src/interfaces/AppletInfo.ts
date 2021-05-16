@@ -17,5 +17,8 @@ export default interface AppletInfo {
     controlDrawerComponent: React.FC<Record<string, unknown>>;
 
     initialState: LooseObject;
-    reducer: (state: LooseObject, actionPayload: ActionPayload) => LooseObject;
+    reducer: (
+        state: LooseObject,
+        actionPayloads: ActionPayload[],
+    ) => LooseObject;
 }

@@ -84,10 +84,10 @@ let InteractiveHistogram = (p) => {
         }
 
         if (p.frameCount % 10 === 0) {
-            p.dispatch({
+            p.dispatch([{
                 action: 'UpdateFrameRate',
                 payload: displayFrameRate,
-            });
+            }]);
         }
 
     };

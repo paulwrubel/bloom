@@ -1,5 +1,5 @@
 import applets from 'Applets';
-import AppletActionPayload from 'interfaces/AppletActionPayload';
+import AppletActionPayloads from 'interfaces/AppletActionPayloads';
 import AppletInfo from 'interfaces/AppletInfo';
 import LooseObject from 'interfaces/LooseObject';
 import React, { createContext, useReducer } from 'react';
@@ -18,7 +18,7 @@ export const AppletStateContext = createContext<LooseObject>(
     appletInitialState,
 );
 export const AppletDispatchContext = createContext<
-    React.Dispatch<AppletActionPayload>
+    React.Dispatch<AppletActionPayloads>
 >(() => {});
 
 const AppletReducer: React.FC<OwnProps> = ({ children }) => {
@@ -28,15 +28,6 @@ const AppletReducer: React.FC<OwnProps> = ({ children }) => {
     ) as AppletInfo;
 
     const [state, dispatch] = useReducer(appletReducer, appletInitialState);
-
-    // const [state, dispatch] = useReducer(
-    //     appletInfo
-    //         ? appletInfo.reducer
-    //         : (state: LooseObject): LooseObject => {
-    //               return state;
-    //           },
-    //     appletInfo ? appletInfo.initialState : {},
-    // );
 
     return (
         <>

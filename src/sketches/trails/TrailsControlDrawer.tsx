@@ -17,10 +17,10 @@ const TrailsControlDrawer: React.FC<OwnProps> = ({ isControlDrawerOpen }) => {
     const state = useContext(AppletStateContext).trails;
     const dispatch = useContext(AppletDispatchContext);
 
-    const pseudoDispatch = (actionPayload: ActionPayload) =>
+    const pseudoDispatch = (actionPayloads: ActionPayload[]) =>
         dispatch({
             applet: 'trails',
-            ...actionPayload,
+            actionPayloads: actionPayloads,
         });
 
     return (
@@ -39,10 +39,12 @@ const TrailsControlDrawer: React.FC<OwnProps> = ({ isControlDrawerOpen }) => {
                 label="Mode"
                 value={state.mode}
                 onChange={(_, newValue: string) =>
-                    pseudoDispatch({
-                        action: 'SetMode',
-                        payload: newValue,
-                    })
+                    pseudoDispatch([
+                        {
+                            action: 'SetMode',
+                            payload: newValue,
+                        },
+                    ])
                 }
                 buttons={[
                     { value: 'static', label: 'Static' },

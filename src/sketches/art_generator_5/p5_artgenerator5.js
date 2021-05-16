@@ -488,34 +488,28 @@ const artgenerator5 = (p) => {
 
     p.batchDispatch = () => {
         if (p.frameCount % updateFrequency === 0) {
-            p.dispatch({
+            p.dispatch([{
                 action: 'UpdateFrameRate',
                 payload: displayFrameRate,
-            });
-            p.dispatch({
+            }, {
                 action: 'UpdateImageWidth',
                 payload: image.width,
-            });
-            p.dispatch({
+            }, {
                 action: 'UpdateImageHeight',
                 payload: image.height,
-            });
-            p.dispatch({
+            }, {
                 action: 'UpdateFringePixelCount',
                 payload: fringePixels.size,
-            });
-            p.dispatch({
+            }, {
                 action: 'UpdateVisitedPixelCount',
                 payload: visitedPixels.size,
-            });
-            p.dispatch({
+            }, {
                 action: 'UpdateNorthChance',
                 payload: NORTH_CHANCE,
-            });
-            p.dispatch({
+            }, {
                 action: 'UpdateIsGenerating',
                 payload: isGenerating,
-            });
+            }]);
         }
     };
 

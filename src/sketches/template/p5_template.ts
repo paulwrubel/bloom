@@ -16,7 +16,7 @@ interface P5RendererWithCanvas extends p5.Renderer {
 
 interface P5WithUpdateStateAndDispatch extends p5 {
     updateState?(state: LooseObject): void;
-    dispatch: React.Dispatch<ActionPayload>;
+    dispatch: React.Dispatch<ActionPayload[]>;
 }
 
 const template: (p: P5WithUpdateStateAndDispatch) => void = (p) => {
@@ -108,21 +108,19 @@ const template: (p: P5WithUpdateStateAndDispatch) => void = (p) => {
 
     const batchDispatch = () => {
         if (p.frameCount % updateFrequency === 0) {
-            p.dispatch({
-                action: 'UpdateFrameRate',
-                payload: displayFrameRate,
-            });
-            // p.dispatch({
-            //     action: 'UpdateSomeOtherInformation',
-            //     payload: someOtherInformation,
-            // });
+            p.dispatch([
+                {
+                    action: 'UpdateFrameRate',
+                    payload: displayFrameRate,
+                },
+            ]);
         }
     };
 
-    p.updateState = ({ sketchProperty }) => {
+    p.updateState = ({ sketchProperty: newSketchProperty }) => {
         if (didSetup) {
-            // if (sketchProperty !== currentSketchPropery) {
-            //     currentSketchProperty = sketchProperty;
+            // if (sketchProperty !== newSketchProperty) {
+            //     sketchProperty = newSketchProperty;
             // }
         }
     };

@@ -96,18 +96,16 @@ let orbiter = (p) => {
         }
 
         if (p.frameCount % 10 === 0) {
-            p.dispatch({
+            p.dispatch([{
                 action: "UpdateFrameRate",
                 payload: displayFrameRate,
-            });
-            p.dispatch({
+            }, {
                 action: "UpdatePlanetSpeed",
                 payload: planetOrbitSpeedMod * planetOrbitSpeed,
-            });
-            p.dispatch({
+            }, {
                 action: "UpdateMoonSpeed",
                 payload: moonOrbitSpeedMod * moonOrbitSpeed,
-            });
+            }]);
         }
     };
 

@@ -6,7 +6,6 @@ import {
     AppletDispatchContext,
     AppletStateContext,
 } from 'components/AppletReducer';
-import AppletActionPayload from 'interfaces/AppletActionPayload';
 import AppletInfo from 'interfaces/AppletInfo';
 import ActionPayload from 'interfaces/ActionPayload';
 
@@ -23,7 +22,7 @@ function instanceOfP5WithUpdateState(
 }
 
 interface p5WithDispatch extends p5 {
-    dispatch?: React.Dispatch<AppletActionPayload>;
+    dispatch?: React.Dispatch<ActionPayload[]>;
 }
 
 function instanceOfP5WithDispatch(
@@ -45,10 +44,10 @@ const P5Container: React.FC<OwnProps> = ({ sketchInstance, appletInfo }) => {
 
     const sketchRef = useRef<HTMLDivElement>(null);
 
-    const pseudoDispatch = (actionPayload: ActionPayload) => {
+    const pseudoDispatch = (actionPayloads: ActionPayload[]) => {
         dispatch({
-            ...actionPayload,
             applet: appletInfo.name,
+            actionPayloads: actionPayloads,
         });
     };
 

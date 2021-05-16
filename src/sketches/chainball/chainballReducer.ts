@@ -14,47 +14,55 @@ enum Action {
 
 export const chainballReducer: (
     state: LooseObject,
-    actionPayload: ActionPayload,
-) => LooseObject = (state, { action, payload }) => {
-    switch (action) {
-        case Action.UpdateFrameRate:
-            return {
-                ...state,
-                frameRate: payload,
-            };
-        case Action.UpdateCoreSpeed:
-            return {
-                ...state,
-                coreSpeed: payload,
-            };
-        case Action.SetMode:
-            return {
-                ...state,
-                mode: payload,
-            };
-        case Action.SetBallCount:
-            return {
-                ...state,
-                ballCount: payload,
-            };
-        case Action.SetLinkLength:
-            return {
-                ...state,
-                linkLength: payload,
-            };
-        case Action.SetLinkTension:
-            return {
-                ...state,
-                linkTension: payload,
-            };
-        case Action.SetLinkDamping:
-            return {
-                ...state,
-                linkDamping: payload,
-            };
-        default:
-            return state;
-    }
+    actionPayloads: ActionPayload[],
+) => LooseObject = (state, actionPayloads) => {
+    actionPayloads.forEach(({ action, payload }) => {
+        switch (action) {
+            case Action.UpdateFrameRate:
+                state = {
+                    ...state,
+                    frameRate: payload,
+                };
+                break;
+            case Action.UpdateCoreSpeed:
+                state = {
+                    ...state,
+                    coreSpeed: payload,
+                };
+                break;
+            case Action.SetMode:
+                state = {
+                    ...state,
+                    mode: payload,
+                };
+                break;
+            case Action.SetBallCount:
+                state = {
+                    ...state,
+                    ballCount: payload,
+                };
+                break;
+            case Action.SetLinkLength:
+                state = {
+                    ...state,
+                    linkLength: payload,
+                };
+                break;
+            case Action.SetLinkTension:
+                state = {
+                    ...state,
+                    linkTension: payload,
+                };
+                break;
+            case Action.SetLinkDamping:
+                state = {
+                    ...state,
+                    linkDamping: payload,
+                };
+                break;
+        }
+    });
+    return state;
 };
 
 export const chainballInitialState: LooseObject = {

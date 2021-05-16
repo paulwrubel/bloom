@@ -9,22 +9,25 @@ enum Action {
 
 export const interactiveHistogramReducer: (
     state: LooseObject,
-    actionPayload: ActionPayload,
-) => LooseObject = (state, { action, payload }) => {
-    switch (action) {
-        case Action.UpdateFrameRate:
-            return {
-                ...state,
-                frameRate: payload,
-            };
-        case Action.SetBarHeightScalar:
-            return {
-                ...state,
-                barHeightScalar: payload,
-            };
-        default:
-            return state;
-    }
+    actionPayloads: ActionPayload[],
+) => LooseObject = (state, actionPayloads) => {
+    actionPayloads.forEach(({ action, payload }) => {
+        switch (action) {
+            case Action.UpdateFrameRate:
+                state = {
+                    ...state,
+                    frameRate: payload,
+                };
+                break;
+            case Action.SetBarHeightScalar:
+                state = {
+                    ...state,
+                    barHeightScalar: payload,
+                };
+                break;
+        }
+    });
+    return state;
 };
 
 export const interactiveHistogramInitialState: LooseObject = {

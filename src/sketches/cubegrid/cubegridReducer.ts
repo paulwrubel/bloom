@@ -19,62 +19,73 @@ enum Action {
 
 export const cubegridReducer: (
     state: LooseObject,
-    actionPayload: ActionPayload,
-) => LooseObject = (state, { action, payload }) => {
-    switch (action) {
-        case Action.UpdateFrameRate:
-            return {
-                ...state,
-                frameRate: payload,
-            };
-        case Action.UpdateCubeCount:
-            return {
-                ...state,
-                cubeCount: payload,
-            };
-        case Action.SetRowCount:
-            return {
-                ...state,
-                rowCount: payload,
-            };
-        case Action.SetColumnCount:
-            return {
-                ...state,
-                columnCount: payload,
-            };
-        case Action.SetLayerCount:
-            return {
-                ...state,
-                layerCount: payload,
-            };
-        case Action.SetCubeDistance:
-            return {
-                ...state,
-                cubeDistance: payload,
-            };
-        case Action.SetCubeLength:
-            return {
-                ...state,
-                cubeLength: payload,
-            };
-        case Action.SetRotationSpeedX:
-            return {
-                ...state,
-                rotationSpeedX: payload,
-            };
-        case Action.SetRotationSpeedY:
-            return {
-                ...state,
-                rotationSpeedY: payload,
-            };
-        case Action.SetRotationSpeedZ:
-            return {
-                ...state,
-                rotationSpeedZ: payload,
-            };
-        default:
-            return state;
-    }
+    actionPayloads: ActionPayload[],
+) => LooseObject = (state, actionPayloads) => {
+    actionPayloads.forEach(({ action, payload }) => {
+        switch (action) {
+            case Action.UpdateFrameRate:
+                state = {
+                    ...state,
+                    frameRate: payload,
+                };
+                break;
+            case Action.UpdateCubeCount:
+                state = {
+                    ...state,
+                    cubeCount: payload,
+                };
+                break;
+            case Action.SetRowCount:
+                state = {
+                    ...state,
+                    rowCount: payload,
+                };
+                break;
+            case Action.SetColumnCount:
+                state = {
+                    ...state,
+                    columnCount: payload,
+                };
+                break;
+            case Action.SetLayerCount:
+                state = {
+                    ...state,
+                    layerCount: payload,
+                };
+                break;
+            case Action.SetCubeDistance:
+                state = {
+                    ...state,
+                    cubeDistance: payload,
+                };
+                break;
+            case Action.SetCubeLength:
+                state = {
+                    ...state,
+                    cubeLength: payload,
+                };
+                break;
+            case Action.SetRotationSpeedX:
+                state = {
+                    ...state,
+                    rotationSpeedX: payload,
+                };
+                break;
+            case Action.SetRotationSpeedY:
+                state = {
+                    ...state,
+                    rotationSpeedY: payload,
+                };
+                break;
+            case Action.SetRotationSpeedZ:
+                state = {
+                    ...state,
+                    rotationSpeedZ: payload,
+                };
+                break;
+        }
+    });
+    return state;
 };
 
 export const cubegridInitialState: LooseObject = {

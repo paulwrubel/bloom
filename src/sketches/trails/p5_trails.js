@@ -24,13 +24,6 @@ let trails = (p) => {
     // holds all trails.
     let trails = [];
 
-    const setClearCanvasCallbackOnce = once(
-        () => p.dispatch({
-            action: 'SetClearCanvasCallback',
-            payload: p.clearScreen,
-        })
-    );
-
     p.setup = function () {
         let w = p.select('.' + P5ContainerClassName).width;
         let h = p.select('.' + P5ContainerClassName).height;
@@ -98,14 +91,13 @@ let trails = (p) => {
 
     p.batchDispatch = function () {
         if (p.frameCount % updateFrequency === 0) {
-            p.dispatch({
+            p.dispatch([{
                 action: 'UpdateFrameRate',
                 payload: displayFrameRate,
-            });
-            p.dispatch({
+            }, {
                 action: 'UpdateActiveTrailCount',
                 payload: trails.length,
-            });
+            }]);
         }
     };
 
@@ -141,13 +133,20 @@ let trails = (p) => {
         }
     };
 
+    const setCallbacksOnce = once(
+        () => p.dispatch([{
+            action: 'SetClearCanvasCallback',
+            payload: p.clearScreen,
+        }])
+    );
+
     p.updateState = ({ mode }) => {
         if (didSetup) {
             if (currentMode !== mode) {
                 currentMode = mode;
             }
         }
-        setClearCanvasCallbackOnce();
+        setCallbacksOnce();
     };
 
 };

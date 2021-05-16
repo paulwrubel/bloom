@@ -16,10 +16,10 @@ const CubeGridControlDrawer: React.FC<OwnProps> = ({ isControlDrawerOpen }) => {
     const state = useContext(AppletStateContext).cubegrid;
     const dispatch = useContext(AppletDispatchContext);
 
-    const pseudoDispatch = (actionPayload: ActionPayload) =>
+    const pseudoDispatch = (actionPayloads: ActionPayload[]) =>
         dispatch({
             applet: 'cubegrid',
-            ...actionPayload,
+            actionPayloads: actionPayloads,
         });
 
     return (
@@ -37,10 +37,12 @@ const CubeGridControlDrawer: React.FC<OwnProps> = ({ isControlDrawerOpen }) => {
                 defaultValue={state.rowCount}
                 value={state.rowCount}
                 onChange={(_, newValue: number | number[]) =>
-                    pseudoDispatch({
-                        action: 'SetRowCount',
-                        payload: newValue,
-                    })
+                    pseudoDispatch([
+                        {
+                            action: 'SetRowCount',
+                            payload: newValue,
+                        },
+                    ])
                 }
                 min={1}
                 max={100}
@@ -52,10 +54,12 @@ const CubeGridControlDrawer: React.FC<OwnProps> = ({ isControlDrawerOpen }) => {
                 defaultValue={state.columnCount}
                 value={state.columnCount}
                 onChange={(_, newValue: number | number[]) =>
-                    pseudoDispatch({
-                        action: 'SetColumnCount',
-                        payload: newValue,
-                    })
+                    pseudoDispatch([
+                        {
+                            action: 'SetColumnCount',
+                            payload: newValue,
+                        },
+                    ])
                 }
                 min={1}
                 max={100}
@@ -67,10 +71,12 @@ const CubeGridControlDrawer: React.FC<OwnProps> = ({ isControlDrawerOpen }) => {
                 defaultValue={state.layerCount}
                 value={state.layerCount}
                 onChange={(_, newValue: number | number[]) =>
-                    pseudoDispatch({
-                        action: 'SetLayerCount',
-                        payload: newValue,
-                    })
+                    pseudoDispatch([
+                        {
+                            action: 'SetLayerCount',
+                            payload: newValue,
+                        },
+                    ])
                 }
                 min={1}
                 max={100}
@@ -83,10 +89,12 @@ const CubeGridControlDrawer: React.FC<OwnProps> = ({ isControlDrawerOpen }) => {
                 defaultValue={state.cubeDistance}
                 value={state.cubeDistance}
                 onChange={(_, newValue: number | number[]) =>
-                    pseudoDispatch({
-                        action: 'SetCubeDistance',
-                        payload: newValue,
-                    })
+                    pseudoDispatch([
+                        {
+                            action: 'SetCubeDistance',
+                            payload: newValue,
+                        },
+                    ])
                 }
                 min={50}
                 max={200}
@@ -99,10 +107,12 @@ const CubeGridControlDrawer: React.FC<OwnProps> = ({ isControlDrawerOpen }) => {
                 defaultValue={state.cubeLength}
                 value={state.cubeLength}
                 onChange={(_, newValue: number | number[]) =>
-                    pseudoDispatch({
-                        action: 'SetCubeLength',
-                        payload: newValue,
-                    })
+                    pseudoDispatch([
+                        {
+                            action: 'SetCubeLength',
+                            payload: newValue,
+                        },
+                    ])
                 }
                 min={10}
                 max={100}
@@ -115,10 +125,12 @@ const CubeGridControlDrawer: React.FC<OwnProps> = ({ isControlDrawerOpen }) => {
                 defaultValue={state.rotationSpeedX}
                 value={state.rotationSpeedX}
                 onChange={(_, newValue: number | number[]) =>
-                    pseudoDispatch({
-                        action: 'SetRotationSpeedX',
-                        payload: newValue,
-                    })
+                    pseudoDispatch([
+                        {
+                            action: 'SetRotationSpeedX',
+                            payload: newValue,
+                        },
+                    ])
                 }
                 min={0}
                 max={5}
@@ -131,10 +143,12 @@ const CubeGridControlDrawer: React.FC<OwnProps> = ({ isControlDrawerOpen }) => {
                 defaultValue={state.rotationSpeedY}
                 value={state.rotationSpeedY}
                 onChange={(_, newValue: number | number[]) =>
-                    pseudoDispatch({
-                        action: 'SetRotationSpeedY',
-                        payload: newValue,
-                    })
+                    pseudoDispatch([
+                        {
+                            action: 'SetRotationSpeedY',
+                            payload: newValue,
+                        },
+                    ])
                 }
                 min={0}
                 max={5}
@@ -147,10 +161,12 @@ const CubeGridControlDrawer: React.FC<OwnProps> = ({ isControlDrawerOpen }) => {
                 defaultValue={state.rotationSpeedZ}
                 value={state.rotationSpeedZ}
                 onChange={(_, newValue: number | number[]) =>
-                    pseudoDispatch({
-                        action: 'SetRotationSpeedZ',
-                        payload: newValue,
-                    })
+                    pseudoDispatch([
+                        {
+                            action: 'SetRotationSpeedZ',
+                            payload: newValue,
+                        },
+                    ])
                 }
                 min={0}
                 max={5}

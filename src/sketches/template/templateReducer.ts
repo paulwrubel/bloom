@@ -10,27 +10,31 @@ enum Action {
 
 export const templateReducer: (
     state: LooseObject,
-    actionPayload: ActionPayload,
-) => LooseObject = (state, { action, payload }) => {
-    switch (action) {
-        case Action.UpdateFrameRate:
-            return {
-                ...state,
-                frameRate: payload,
-            };
-        case Action.UpdateSomeOtherInformation:
-            return {
-                ...state,
-                someOtherInformation: payload,
-            };
-        case Action.SetSketchProperty:
-            return {
-                ...state,
-                sketchProperty: payload,
-            };
-        default:
-            return state;
-    }
+    actionPayloads: ActionPayload[],
+) => LooseObject = (state, actionPayloads) => {
+    actionPayloads.forEach(({ action, payload }) => {
+        switch (action) {
+            case Action.UpdateFrameRate:
+                state = {
+                    ...state,
+                    frameRate: payload,
+                };
+                break;
+            case Action.UpdateSomeOtherInformation:
+                state = {
+                    ...state,
+                    someOtherInformation: payload,
+                };
+                break;
+            case Action.SetSketchProperty:
+                state = {
+                    ...state,
+                    sketchProperty: payload,
+                };
+                break;
+        }
+    });
+    return state;
 };
 
 export const templateInitialState: LooseObject = {

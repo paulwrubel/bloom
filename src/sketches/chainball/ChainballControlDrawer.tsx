@@ -6,6 +6,7 @@ import {
 import ControlDrawer from 'components/ControlDrawer';
 import RadioButtonsPanel from 'components/panels/RadioButtonsPanel';
 import SliderPanel from 'components/panels/SliderPanel';
+import ActionPayload from 'interfaces/ActionPayload';
 import React, { useContext } from 'react';
 
 interface OwnProps extends Record<string, unknown> {
@@ -17,6 +18,12 @@ const ChainballControlDrawer: React.FC<OwnProps> = ({
 }) => {
     const state = useContext(AppletStateContext).chainball;
     const dispatch = useContext(AppletDispatchContext);
+
+    const pseudoDispatch = (actionPayloads: ActionPayload[]) =>
+        dispatch({
+            applet: 'chainball',
+            actionPayloads: actionPayloads,
+        });
 
     return (
         <ControlDrawer isControlDrawerOpen={isControlDrawerOpen}>
@@ -32,11 +39,12 @@ const ChainballControlDrawer: React.FC<OwnProps> = ({
                 label="Mode"
                 value={state.mode}
                 onChange={(_, newValue: string) => {
-                    dispatch({
-                        applet: 'chainball',
-                        action: 'SetMode',
-                        payload: newValue,
-                    });
+                    pseudoDispatch([
+                        {
+                            action: 'SetMode',
+                            payload: newValue,
+                        },
+                    ]);
                 }}
                 buttons={[
                     {
@@ -54,11 +62,12 @@ const ChainballControlDrawer: React.FC<OwnProps> = ({
                 defaultValue={state.ballCount}
                 value={state.ballCount}
                 onChange={(_, newValue: number | number[]) =>
-                    dispatch({
-                        applet: 'chainball',
-                        action: 'SetBallCount',
-                        payload: newValue,
-                    })
+                    pseudoDispatch([
+                        {
+                            action: 'SetBallCount',
+                            payload: newValue,
+                        },
+                    ])
                 }
                 min={5}
                 max={500}
@@ -70,11 +79,12 @@ const ChainballControlDrawer: React.FC<OwnProps> = ({
                 defaultValue={state.linkLength}
                 value={state.linkLength}
                 onChange={(_, newValue: number | number[]) =>
-                    dispatch({
-                        applet: 'chainball',
-                        action: 'SetLinkLength',
-                        payload: newValue,
-                    })
+                    pseudoDispatch([
+                        {
+                            action: 'SetLinkLength',
+                            payload: newValue,
+                        },
+                    ])
                 }
                 min={0}
                 max={800}
@@ -87,11 +97,12 @@ const ChainballControlDrawer: React.FC<OwnProps> = ({
                     defaultValue={state.linkTension}
                     value={state.linkTension}
                     onChange={(_, newValue: number | number[]) =>
-                        dispatch({
-                            applet: 'chainball',
-                            action: 'SetLinkTension',
-                            payload: newValue,
-                        })
+                        pseudoDispatch([
+                            {
+                                action: 'SetLinkTension',
+                                payload: newValue,
+                            },
+                        ])
                     }
                     min={0.0}
                     max={1.0}
@@ -106,11 +117,12 @@ const ChainballControlDrawer: React.FC<OwnProps> = ({
                     defaultValue={state.linkDamping}
                     value={state.linkDamping}
                     onChange={(_, newValue: number | number[]) =>
-                        dispatch({
-                            applet: 'chainball',
-                            action: 'SetLinkDamping',
-                            payload: newValue,
-                        })
+                        pseudoDispatch([
+                            {
+                                action: 'SetLinkDamping',
+                                payload: newValue,
+                            },
+                        ])
                     }
                     min={0.0}
                     max={1.0}

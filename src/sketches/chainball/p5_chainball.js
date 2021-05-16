@@ -255,14 +255,13 @@ let chainball = (p) => {
 
         // callbacks
         if (p.frameCount % 10 === 0) {
-            p.dispatch({
+            p.dispatch([{
                 action: 'UpdateFrameRate',
                 payload: displayFrameRate,
-            });
-            p.dispatch({
+            }, {
                 action: 'UpdateCoreSpeed',
                 payload: core.velocity.mag(),
-            });
+            }]);
         }
 
 
@@ -351,7 +350,6 @@ let chainball = (p) => {
         let w = p.select('.P5Container').width; // - p.select(".Sidebar").width;
         let h = p.select('.P5Container').height;
         p.resizeCanvas(w, h);
-        console.log('did resize');
     };
 
     p.mousePressed = function (event) {

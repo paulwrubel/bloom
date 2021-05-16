@@ -147,7 +147,7 @@ let cubegrid = (p) => {
 
         p.calculateFrameRate();
 
-        p.updateCallbacks();
+        p.batchDispatch();
 
     };
 
@@ -180,12 +180,12 @@ let cubegrid = (p) => {
         }
     }
 
-    p.updateCallbacks = function () {
+    p.batchDispatch = function () {
         if (p.frameCount % updateFrequency === 0) {
-            p.dispatch({
+            p.dispatch([{
                 action: "UpdateFrameRate",
                 payload: displayFrameRate,
-            })
+            }])
         }
     };
 
@@ -240,26 +240,26 @@ let cubegrid = (p) => {
             if (rowCount !== newRowCount) {
                 rowCount = newRowCount;
                 p.setupColors();
-                p.dispatch({
+                p.dispatch([{
                     action: 'UpdateCubeCount',
                     payload: rowCount * columnCount * layerCount,
-                })
+                }])
             }
             if (columnCount !== newColumnCount) {
                 columnCount = newColumnCount;
                 p.setupColors();
-                p.dispatch({
+                p.dispatch([{
                     action: 'UpdateCubeCount',
                     payload: rowCount * columnCount * layerCount,
-                })
+                }])
             }
             if (layerCount !== newLayerCount) {
                 layerCount = newLayerCount;
                 p.setupColors();
-                p.dispatch({
+                p.dispatch([{
                     action: 'UpdateCubeCount',
                     payload: rowCount * columnCount * layerCount,
-                })
+                }])
             }
             if (cubeDistance !== newCubeDistance) {
                 cubeDistance = newCubeDistance;

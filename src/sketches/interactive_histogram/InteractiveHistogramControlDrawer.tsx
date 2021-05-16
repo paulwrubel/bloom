@@ -5,6 +5,7 @@ import {
 } from 'components/AppletReducer';
 import ControlDrawer from 'components/ControlDrawer';
 import SliderPanel from 'components/panels/SliderPanel';
+import ActionPayload from 'interfaces/ActionPayload';
 import React, { useContext } from 'react';
 
 interface OwnProps extends Record<string, unknown> {
@@ -16,6 +17,12 @@ const InteractiveHistogramControlDrawer: React.FC<OwnProps> = ({
 }) => {
     const state = useContext(AppletStateContext).interactive_histogram;
     const dispatch = useContext(AppletDispatchContext);
+
+    const pseudoDispatch = (actionPayloads: ActionPayload[]) =>
+        dispatch({
+            applet: 'interactive-histogram',
+            actionPayloads: actionPayloads,
+        });
 
     return (
         <ControlDrawer isControlDrawerOpen={isControlDrawerOpen}>
@@ -29,11 +36,12 @@ const InteractiveHistogramControlDrawer: React.FC<OwnProps> = ({
                 defaultValue={state.barHeightScalar}
                 value={state.barHeightScalar}
                 onChange={(_, newValue: number | number[]) =>
-                    dispatch({
-                        applet: 'interactive-histogram',
-                        action: 'SetBarHeightScalar',
-                        payload: newValue,
-                    })
+                    pseudoDispatch([
+                        {
+                            action: 'SetBarHeightScalar',
+                            payload: newValue,
+                        },
+                    ])
                 }
                 min={50}
                 max={500}

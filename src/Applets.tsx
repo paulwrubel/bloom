@@ -49,6 +49,14 @@ import {
     trailsReducer,
 } from 'sketches/trails/trailsReducer';
 
+import p5_triangles from 'sketches/triangles/p5_triangles';
+import TrianglesControlDrawer from 'sketches/triangles/TrianglesControlDrawer';
+// import trianglesCardImage from 'sketches/triangles/trianglesCardImage.jpg';
+import {
+    trianglesInitialState,
+    trianglesReducer,
+} from 'sketches/triangles/trianglesReducer';
+
 const applets: AppletInfo[] = [
     {
         name: 'chainball',
@@ -146,13 +154,24 @@ const applets: AppletInfo[] = [
         initialState: trailsInitialState,
         reducer: trailsReducer,
     },
-    //     {
-    //         name: 'triangles',
-    //         displayName: 'Triangles',
-    //         version: 'v0.8.2',
-    //         description: 'Triangles',
-    //         creationDate: new Date('November 5, 2017 00:00:00'),
-    //     },
+    {
+        name: 'triangles',
+        displayName: 'Triangles',
+        version: 'v0.8.2',
+        tagline: 'TODO',
+        description: 'TODO',
+        tags: ['interactive', 'simulation'],
+        creationDate: new Date('November 5, 2017 00:00:00'),
+        // cardImage: trianglesCardImage,
+
+        sketchInstance: p5_triangles,
+        controlDrawerComponent: TrianglesControlDrawer as React.FC<
+            Record<string, unknown>
+        >,
+
+        initialState: trianglesInitialState,
+        reducer: trianglesReducer,
+    },
     {
         name: 'art-generator-5',
         displayName: 'Art Generator 5',

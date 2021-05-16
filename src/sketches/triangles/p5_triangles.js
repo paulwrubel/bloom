@@ -1,3 +1,6 @@
+import { once } from 'utils';
+import { P5ContainerClassName } from 'components/P5Container';
+
 import Triangle from "./p5_triangle"
 import GravityMode from "./p5_gravitymode"
 
@@ -100,8 +103,8 @@ let triangles = (p) => {
     let keyCodes = [];
 
     p.setup = function () {
-        let w = p.select(".SketchContainer").width;
-        let h = p.select(".SketchContainer").height;
+        let w = p.select('.' + P5ContainerClassName).width;
+        let h = p.select('.' + P5ContainerClassName).height;
         let c = p.createCanvas(w, h, p.P2D);
         p.disableRightClick(c.canvas);
         p.frameRate(120);
@@ -241,8 +244,8 @@ let triangles = (p) => {
         if (generationMode === GenerationMode.CONTINUOUS) {
             //  Add Triangles
             if (placementMode === PlacementMode.TRIANGLE &&
-                p.isMouseOverCanvas() && 
-                mouseButtons[p.RIGHT] && 
+                p.isMouseOverCanvas() &&
+                mouseButtons[p.RIGHT] &&
                 p.frameCount % TRIANGLE_ADD_FREQ === 0) {
                 p.handleAdd();
             }
@@ -267,7 +270,7 @@ let triangles = (p) => {
         // END SKETCH
 
         p.calculateFrameRate();
-        p.updateCallbacks();
+        p.batchDispatch();
     };
 
     p.drawCrosshair = () => {
@@ -536,23 +539,42 @@ let triangles = (p) => {
         }
     }
 
-    p.updateCallbacks = function () {
+    p.batchDispatch = function () {
         if (p.frameCount % updateFrequency === 0) {
-            if (typeof frameRateCallback !== "undefined") {
-                frameRateCallback(displayFrameRate.toFixed(0));
-            }
+            p.dispatch([{
+                action: 'UpdateFrameRate',
+                payload: displayFrameRate,
+            }, {
+                action: 'UpdateTriangleCount',
+                payload: triangles.length,
+            }, {
+                action: 'UpdateBulletCount',
+                payload: bulletCount,
+            }, {
+                action: 'UpdateTriangleUpdateTime',
+                payload: triangleUpdateTime,
+            }, {
+                action: 'UpdateBulletUpdateTime',
+                payload: bulletUpdateTime,
+            }, {
+                action: 'UpdateTriangleDrawTime',
+                payload: triangleDrawTime,
+            }, {
+                action: 'UpdateBulletDrawTime',
+                payload: bulletDrawTime,
+            }]);
 
-            if (typeof informationCallback !== "undefined") {
-                informationCallback(new Map([
-                    ["frame_rate", "FPS: " + displayFrameRate.toFixed(0)],
-                    ["triangle_count", "Triangles: " + triangles.length],
-                    ["bullet_count", "Bullets: " + bulletCount],
-                    ["triangle_update_time", "Triangle Update Time: " + triangleUpdateTime.toFixed(2) + "ms"],
-                    ["bullet_update_time", "Bullet Update Time: " + bulletUpdateTime.toFixed(2) + "ms"],
-                    ["triangle_draw_time", "Triangle Draw Time: " + triangleDrawTime.toFixed(2) + "ms"],
-                    ["bullet_draw_time", "Bullet Draw Time: " + bulletDrawTime.toFixed(2) + "ms"],
-                ]));
-            }
+            // if (typeof informationCallback !== "undefined") {
+            //     informationCallback(new Map([
+            //         ["frame_rate", "FPS: " + displayFrameRate.toFixed(0)],
+            //         ["triangle_count", "Triangles: " + triangles.length],
+            //         ["bullet_count", "Bullets: " + bulletCount],
+            //         ["triangle_update_time", "Triangle Update Time: " + triangleUpdateTime.toFixed(2) + "ms"],
+            //         ["bullet_update_time", "Bullet Update Time: " + bulletUpdateTime.toFixed(2) + "ms"],
+            //         ["triangle_draw_time", "Triangle Draw Time: " + triangleDrawTime.toFixed(2) + "ms"],
+            //         ["bullet_draw_time", "Bullet Draw Time: " + bulletDrawTime.toFixed(2) + "ms"],
+            //     ]));
+            // }
             // if (typeof activeTrailCountCallback !== "undefined") {
             //     activeTrailCountCallback(trails.length);
             // }
@@ -579,104 +601,65 @@ let triangles = (p) => {
     };
 
     p.resize = function () {
-        let w = p.select(".SketchContainer").width;// - p.select(".Sidebar").width;
-        let h = p.select(".SketchContainer").height;
+        let w = p.select('.' + P5ContainerClassName).width;// - p.select(".Sidebar").width;
+        let h = p.select('.' + P5ContainerClassName).height;
         p.resizeCanvas(w, h);
 
         p.background(0);
     };
 
     p.checkResize = function () {
-        let w = p.select(".SketchContainer").width;// - p.select(".Sidebar").width;
-        let h = p.select(".SketchContainer").height;
+        let w = p.select('.' + P5ContainerClassName).width;// - p.select(".Sidebar").width;
+        let h = p.select('.' + P5ContainerClassName).height;
         if (w !== p.width || h !== p.height) {
             p.resize();
         }
     };
 
-    p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
+    const setCallbacksOnce = once(
+        () => p.dispatch([{
+            action: 'SetClearTrianglesCallback',
+            payload: p.clearTriangles,
+        }, {
+            action: 'SetClearBulletsCallback',
+            payload: p.clearBullets,
+        }, {
+            action: 'SetClearGravityPointsCallback',
+            payload: p.clearGravityPoints,
+        }])
+    );
+
+    p.updateState = ({
+        generationMode: newGenerationMode,
+        gravityMode: newGravityMode,
+        placementMode: newPlacementMode,
+        aimMode: newAimMode,
+        isBorderEndable: newIsBorderEnabled,
+        isAutoFireEnabled: newIsAutoFireEnabled
+    }) => {
         // sketch components
         if (didSetup) {
-            if (typeof newProps.generationMode !== "undefined") {
-                if (generationMode !== newProps.generationMode) {
-                    generationMode = newProps.generationMode;
-                }
+            if (generationMode !== newGenerationMode) {
+                generationMode = newGenerationMode;
             }
-            if (typeof newProps.gravityMode !== "undefined") {
-                if (gravityMode !== newProps.gravityMode) {
-                    gravityMode = newProps.gravityMode;
-                }
+            if (gravityMode !== newGravityMode) {
+                gravityMode = newGravityMode;
             }
-            if (typeof newProps.placementMode !== "undefined") {
-                if (placementMode !== newProps.placementMode) {
-                    placementMode = newProps.placementMode;
-                }
+            if (placementMode !== newPlacementMode) {
+                placementMode = newPlacementMode;
             }
-            if (typeof newProps.aimMode !== "undefined") {
-                if (aimMode !== newProps.aimMode) {
-                    aimMode = newProps.aimMode;
-                }
+            if (aimMode !== newAimMode) {
+                aimMode = newAimMode;
             }
-            if (typeof newProps.isBorderEnabled !== "undefined") {
-                if (isBorderEnabled !== newProps.isBorderEnabled) {
-                    isBorderEnabled = newProps.isBorderEnabled;
-                }
+            if (isBorderEnabled !== newIsBorderEnabled) {
+                isBorderEnabled = newIsBorderEnabled;
             }
-            if (typeof newProps.isAutoFireEnabled !== "undefined") {
-                if (isAutoFireEnabled !== newProps.isAutoFireEnabled) {
-                    isAutoFireEnabled = newProps.isAutoFireEnabled;
-                }
+            if (isAutoFireEnabled !== newIsAutoFireEnabled) {
+                isAutoFireEnabled = newIsAutoFireEnabled;
             }
         }
 
-        // info callbacks
-        // if (typeof newProps.onFrameRateChange !== "undefined") {
-        //     if (typeof frameRateCallback === "undefined") {
-        //         frameRateCallback = newProps.onFrameRateChange;
-        //     }
-        // }
-        // if (typeof newProps.onTriangleCountChange !== "undefined") {
-        //     if (typeof triangleCountCallback === "undefined") {
-        //         triangleCountCallback = newProps.onTriangleCountChange;
-        //     }
-        // }
-        // if (typeof newProps.onBulletCountChange !== "undefined") {
-        //     if (typeof bulletCountCallback === "undefined") {
-        //         bulletCountCallback = newProps.onBulletCountChange;
-        //     }
-        // }
-        // if (typeof newProps.onTriangleUpdateTimeChange !== "undefined") {
-        //     if (typeof triangleUpdateTimeChange === "undefined") {
-        //         bulletCountCallback = newProps.onTriangleTimeChange;
-        //     }
-        // }
-
-
-        if (typeof newProps.setClearTrianglesCallback !== "undefined") {
-            if (!isClearTrianglesCallbackSet) {
-                isClearTrianglesCallbackSet = true;
-                newProps.setClearTrianglesCallback(p.clearTriangles);
-            }
-        }
-        if (typeof newProps.setClearBulletsCallback !== "undefined") {
-            if (!isClearBulletsCallbackSet) {
-                isClearBulletsCallbackSet = true;
-                newProps.setClearBulletsCallback(p.clearBullets);
-            }
-        }
-        if (typeof newProps.setClearGravityPointsCallback !== "undefined") {
-            if (!isClearGravityPointsCallbackSet) {
-                isClearGravityPointsCallbackSet = true;
-                newProps.setClearGravityPointsCallback(p.clearGravityPoints);
-            }
-        }
-        // HIGHLY EXPERIMENTAL
-
-        if (typeof newProps.onInformationChange !== "undefined") {
-            if (typeof informationCallback === "undefined") {
-                informationCallback = newProps.onInformationChange;
-            }
-        }
+        setCallbacksOnce();
     };
 
 };
