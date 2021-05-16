@@ -41,6 +41,14 @@ import {
     artGenerator5Reducer,
 } from 'sketches/art_generator_5/artGenerator5Reducer';
 
+import p5_trails from 'sketches/trails/p5_trails';
+import TrailsControlDrawer from 'sketches/trails/TrailsControlDrawer';
+import trailsCardImage from 'sketches/trails/trailsCardImage.jpg';
+import {
+    trailsInitialState,
+    trailsReducer,
+} from 'sketches/trails/trailsReducer';
+
 const applets: AppletInfo[] = [
     {
         name: 'chainball',
@@ -119,13 +127,25 @@ const applets: AppletInfo[] = [
         initialState: cubegridInitialState,
         reducer: cubegridReducer,
     },
-    //     {
-    //         name: 'trails',
-    //         displayName: 'Trails',
-    //         version: 'v0.7',
-    //         description: 'Trail art creator',
-    //         creationDate: new Date('January 1, 2016 00:00:00'),
-    //     },
+    {
+        name: 'trails',
+        displayName: 'Trails',
+        version: 'v0.7',
+        tagline: 'Artistic rainbow trail creator.',
+        description: `A simple artistic and interactive sketch which produces rainbow trails of 
+            overlapping circles, which are controlled by the mouse.`,
+        tags: ['art', 'interactive'],
+        creationDate: new Date('January 1, 2016 00:00:00'),
+        cardImage: trailsCardImage,
+
+        sketchInstance: p5_trails,
+        controlDrawerComponent: TrailsControlDrawer as React.FC<
+            Record<string, unknown>
+        >,
+
+        initialState: trailsInitialState,
+        reducer: trailsReducer,
+    },
     //     {
     //         name: 'triangles',
     //         displayName: 'Triangles',

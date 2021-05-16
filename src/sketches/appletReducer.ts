@@ -7,6 +7,7 @@ import { chainballInitialState } from './chainball/chainballReducer';
 import { cubegridInitialState } from './cubegrid/cubegridReducer';
 import { interactiveHistogramInitialState } from './interactive_histogram/interactiveHistogramReducer';
 import { orbiterInitialState } from './orbiter/orbiterReducer';
+import { trailsInitialState } from './trails/trailsReducer';
 
 export const appletReducer: (
     state: LooseObject,
@@ -35,4 +36,5 @@ export const appletInitialState: LooseObject = {
     interactive_histogram: interactiveHistogramInitialState,
     cubegrid: cubegridInitialState,
     art_generator_5: artGenerator5InitialState,
+    trails: trailsInitialState,
 };
