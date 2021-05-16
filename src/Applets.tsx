@@ -33,13 +33,21 @@ import {
     cubegridReducer,
 } from 'sketches/cubegrid/cubegridReducer';
 
+import p5_artgenerator5 from 'sketches/art_generator_5/p5_artgenerator5';
+import ArtGenerator5ControlDrawer from 'sketches/art_generator_5/ArtGenerator5ControlDrawer';
+import artGenerator5CardImage from 'sketches/art_generator_5/artGenerator5CardImage.jpg';
+import {
+    artGenerator5InitialState,
+    artGenerator5Reducer,
+} from 'sketches/art_generator_5/artGenerator5Reducer';
+
 const applets: AppletInfo[] = [
     {
         name: 'chainball',
         displayName: 'Chainball',
         version: 'v1.0',
-        description: `A two-dimensional physics and momentum simulation. 
-            Simplistic and satisfying, this sketch is one of the more fleshed-out ones. 
+        tagline: `A two-dimensional physics and momentum simulation.`,
+        description: `Simplistic and satisfying, this sketch is one of the more fleshed-out ones. 
             Being highly customizable, this one is one of my consistent favourites that I always go back to for fun.`,
         tags: ['physics', 'simulation', 'interactive'],
         creationDate: new Date('February 9, 2020 00:00:00'),
@@ -57,8 +65,8 @@ const applets: AppletInfo[] = [
         name: 'orbiter',
         displayName: 'Orbiter',
         version: 'v0.2',
-        description: `An overly-simplistic orbital visual.
-            With no interactivity besides the star's location, this sketch remains no more than 
+        tagline: `An overly-simplistic orbital visual.`,
+        description: `With no interactivity besides the star's location, this sketch remains no more than 
             a proof-of-concept for angular positioning via mathematics.`,
         tags: ['simple', 'simulation'],
         creationDate: new Date('March 8, 2020 00:00:00'),
@@ -76,9 +84,10 @@ const applets: AppletInfo[] = [
         name: 'interactive-histogram',
         displayName: 'Interactive Histogram',
         version: 'v1.0',
-        description: `An interactive rainbow "histogram". This values are arbitrary and this sketch, being one of the first
+        tagline: `An interactive rainbow "histogram".`,
+        description: `The histogram's values are arbitrary and this sketch, being one of the first
             I've ever created, was a simple test of reactions to mouse location and actions.`,
-        tags: ['simple', 'art'],
+        tags: ['simple', 'art', 'interactive'],
         creationDate: new Date('January 1, 2016 00:00:00'),
         cardImage: interactiveHistogramCardImage,
 
@@ -94,7 +103,8 @@ const applets: AppletInfo[] = [
         name: 'cubegrid',
         displayName: 'CubeGrid',
         version: 'v0.9',
-        description: `3D grid of cubes. This sketch is a experiment with p5js's WEBGL rendering mode. This is very interactive,
+        tagline: `3D grid of cubes.`,
+        description: `This sketch is a experiment with p5js's WEBGL rendering mode. This is very interactive,
             responding to superfluous controls and mouse movements, but is prone to extremely poor performance, especially as
             cube counts rise.`,
         tags: ['3D', 'spacial', 'interactive', 'webgl'],
@@ -123,13 +133,26 @@ const applets: AppletInfo[] = [
     //         description: 'Triangles',
     //         creationDate: new Date('November 5, 2017 00:00:00'),
     //     },
-    //     {
-    //         name: 'artgenerator5',
-    //         displayName: 'Art Generator 5',
-    //         version: 'v0.3',
-    //         description: 'Procedural art generator, pixel by pixel',
-    //         creationDate: new Date('March 17, 2020 00:00:00'),
-    //     },
+    {
+        name: 'art-generator-5',
+        displayName: 'Art Generator 5',
+        version: 'v0.3',
+        tagline: `Procedural art generator.`,
+        description: `Pixel by pixel, this generator is the latest iteration in many differed version I've created.
+            Clicking starts a seed, from which pixel colours are generated based on their neighbors. Once all pixels have
+            been given colours, the art work is complete and can be saved.`,
+        tags: ['art'],
+        creationDate: new Date('March 17, 2020 00:00:00'),
+        cardImage: artGenerator5CardImage,
+
+        sketchInstance: p5_artgenerator5,
+        controlDrawerComponent: ArtGenerator5ControlDrawer as React.FC<
+            Record<string, unknown>
+        >,
+
+        initialState: artGenerator5InitialState,
+        reducer: artGenerator5Reducer,
+    },
     //     {
     //         name: 'lasers',
     //         displayName: 'Lasers',

@@ -6,6 +6,7 @@ export default interface AppletInfo {
     name: string;
     displayName: string;
     version: string;
+    tagline: string;
     description: string;
     tags: string[];
     creationDate: Date;

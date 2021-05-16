@@ -3,25 +3,35 @@ import {
     CardActions,
     CardContent,
     CardHeader,
+    Collapse,
     Grid,
+    Typography,
 } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AppletInfo from 'interfaces/AppletInfo';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AppletCardWrapper, StyledCard, StyledCardMedia } from './styles';
+import {
+    AppletCardWrapper,
+    StyledCard,
+    StyledCardMedia,
+    StyledTransformingIconButton,
+} from './styles';
 
 interface OwnProps {
     appletInfo: AppletInfo;
 }
 
 const AppletCard: React.FC<OwnProps> = ({ appletInfo }) => {
+    const [isCardExpanded, setIsCardExpanded] = useState(false);
+
     const appletTagsString = appletInfo.tags
         .map((tag) => tag.toLowerCase())
         .sort()
         .join(' | ');
 
     return (
-        <Grid item>
+        <Grid item xs>
             <AppletCardWrapper>
                 <StyledCard>
                     <CardHeader
@@ -35,8 +45,10 @@ const AppletCard: React.FC<OwnProps> = ({ appletInfo }) => {
                             image={appletInfo.cardImage}
                         />
                     )}
-                    <CardContent>{appletInfo.description}</CardContent>
-                    <CardActions>
+                    <CardContent>
+                        <Typography>{appletInfo.tagline}</Typography>
+                    </CardContent>
+                    <CardActions disableSpacing>
                         <Button
                             size="small"
                             color="primary"
@@ -45,7 +57,21 @@ const AppletCard: React.FC<OwnProps> = ({ appletInfo }) => {
                         >
                             Select
                         </Button>
+                        <StyledTransformingIconButton
+                            color="inherit"
+                            isCardExpanded={isCardExpanded}
+                            onClick={() => setIsCardExpanded(!isCardExpanded)}
+                            aria-expanded={isCardExpanded}
+                            aria-label="show more"
+                        >
+                            <ExpandMoreIcon />
+                        </StyledTransformingIconButton>
                     </CardActions>
+                    <Collapse in={isCardExpanded} timeout="auto" unmountOnExit>
+                        <CardContent>
+                            <Typography>{appletInfo.description}</Typography>
+                        </CardContent>
+                    </Collapse>
                 </StyledCard>
             </AppletCardWrapper>
         </Grid>

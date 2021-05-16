@@ -4,6 +4,7 @@ import { Grid } from '@material-ui/core';
 import AppletCard from 'components/AppletCard';
 import applets from 'Applets';
 import { CardGridWrapper } from './styles';
+import AppletInfo from 'interfaces/AppletInfo';
 
 interface OwnProps {
     bloomVersion: string;
@@ -12,6 +13,12 @@ interface OwnProps {
 }
 
 const Dashboard: React.FC<OwnProps> = ({ bloomVersion }) => {
+    const sortedApplets = [...applets].sort((a: AppletInfo, b: AppletInfo) => {
+        const isABeforeB =
+            a.displayName.toLowerCase() < b.displayName.toLowerCase();
+        return isABeforeB ? -1 : 1;
+    });
+
     return (
         <>
             <MenuBar
@@ -21,7 +28,7 @@ const Dashboard: React.FC<OwnProps> = ({ bloomVersion }) => {
             />
             <CardGridWrapper>
                 <Grid container spacing={2} justify="space-evenly">
-                    {applets.map((appletInfo) => {
+                    {sortedApplets.map((appletInfo) => {
                         return (
                             <AppletCard
                                 key={appletInfo.name}

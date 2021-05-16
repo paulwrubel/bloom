@@ -1,3 +1,5 @@
+import { P5ContainerClassName } from 'components/P5Container';
+
 const artgenerator5 = (p) => {
 
     // Required for all sketches
@@ -52,8 +54,8 @@ const artgenerator5 = (p) => {
     let drawPixels;
 
     p.setup = () => {
-        let w = p.select(".SketchContainer").width;
-        let h = p.select(".SketchContainer").height;
+        let w = p.select('.' + P5ContainerClassName).width;
+        let h = p.select('.' + P5ContainerClassName).height;
         let c = p.createCanvas(w, h, p.P2D);
         p.disableRightClick(c.canvas);
 
@@ -116,7 +118,7 @@ const artgenerator5 = (p) => {
         // END SKETCH
 
         p.calculateFrameRate();
-        p.updateCallbacks();
+        p.batchDispatch();
     };
 
     // helpers
@@ -484,27 +486,36 @@ const artgenerator5 = (p) => {
         }
     };
 
-    p.updateCallbacks = () => {
+    p.batchDispatch = () => {
         if (p.frameCount % updateFrequency === 0) {
-            // if (typeof frameRateCallback !== "undefined") {
-            //     frameRateCallback(displayFrameRate.toFixed(0));
-            // }
-
-            if (typeof informationCallback !== "undefined") {
-                let percentageFilled = ((visitedPixels.size / (image.width * image.height)) * 100);
-                informationCallback(new Map([
-                    ["instructions", "Press SPACEBAR to save image"],
-                    ["separator_1", "---"],
-                    ["frame_rate", "FPS: " + displayFrameRate.toFixed(0)],
-                    ["image_size", "Image Size: " + image.width + " x " + image.height],
-                    ["pixel_count", "Pixels: " + (image.width * image.height)],
-                    ["fringe_count", "Fringe: " + fringePixels.size],
-                    ["visited_count", "Visited: " + visitedPixels.size],
-                    ["north_chance", "North Chance: " + (NORTH_CHANCE * 100).toFixed(2) + "%"],
-                    ["percentage_filled", "Filled: " + percentageFilled.toFixed(2) + "%"],
-                    ["is_generating", "Generating: " + isGenerating],
-                ]));
-            }
+            p.dispatch({
+                action: 'UpdateFrameRate',
+                payload: displayFrameRate,
+            });
+            p.dispatch({
+                action: 'UpdateImageWidth',
+                payload: image.width,
+            });
+            p.dispatch({
+                action: 'UpdateImageHeight',
+                payload: image.height,
+            });
+            p.dispatch({
+                action: 'UpdateFringePixelCount',
+                payload: fringePixels.size,
+            });
+            p.dispatch({
+                action: 'UpdateVisitedPixelCount',
+                payload: visitedPixels.size,
+            });
+            p.dispatch({
+                action: 'UpdateNorthChance',
+                payload: NORTH_CHANCE,
+            });
+            p.dispatch({
+                action: 'UpdateIsGenerating',
+                payload: isGenerating,
+            });
         }
     };
 
@@ -528,8 +539,8 @@ const artgenerator5 = (p) => {
     };
 
     p.resize = () => {
-        let w = p.select(".SketchContainer").width;
-        let h = p.select(".SketchContainer").height;
+        let w = p.select('.' + P5ContainerClassName).width;
+        let h = p.select('.' + P5ContainerClassName).height;
         p.resizeCanvas(w, h);
 
         // visitedPixels.clear();
@@ -544,28 +555,23 @@ const artgenerator5 = (p) => {
     };
 
     p.checkResize = () => {
-        let w = p.select(".SketchContainer").width;
-        let h = p.select(".SketchContainer").height;
+        let w = p.select('.' + P5ContainerClassName).width;
+        let h = p.select('.' + P5ContainerClassName).height;
         if (w !== p.width || h !== p.height) {
             p.resize();
         }
     };
 
-    p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
-        // sketch components
-        if (didSetup) {
-            // if (typeof newProps.generationMode !== "undefined") {
-            //     if (generationMode !== newProps.generationMode) {
-            //         generationMode = newProps.generationMode;
-            //     }
-            // }
-        }
-        if (typeof newProps.onInformationChange !== "undefined") {
-            if (typeof informationCallback === "undefined") {
-                informationCallback = newProps.onInformationChange;
-            }
-        }
-    };
+    // p.updateState = (newProps) => {
+    //     // sketch components
+    //     if (didSetup) {
+    //         // if (typeof newProps.generationMode !== "undefined") {
+    //         //     if (generationMode !== newProps.generationMode) {
+    //         //         generationMode = newProps.generationMode;
+    //         //     }
+    //         // }
+    //     }
+    // };
 
 };
 

@@ -2,6 +2,7 @@ import applets from 'Applets';
 import AppletActionPayload from 'interfaces/AppletActionPayload';
 import AppletInfo from 'interfaces/AppletInfo';
 import LooseObject from 'interfaces/LooseObject';
+import { artGenerator5InitialState } from './art_generator_5/artGenerator5Reducer';
 import { chainballInitialState } from './chainball/chainballReducer';
 import { cubegridInitialState } from './cubegrid/cubegridReducer';
 import { interactiveHistogramInitialState } from './interactive_histogram/interactiveHistogramReducer';
@@ -33,4 +34,5 @@ export const appletInitialState: LooseObject = {
     orbiter: orbiterInitialState,
     interactive_histogram: interactiveHistogramInitialState,
     cubegrid: cubegridInitialState,
+    art_generator_5: artGenerator5InitialState,
 };
