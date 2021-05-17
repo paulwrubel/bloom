@@ -14,7 +14,7 @@ interface OwnProps {
 const ButtonPanel: React.FC<OwnProps> = ({ buttons }) => {
     return (
         <StyledButtonPaper elevation={1}>
-            <Grid container>
+            <Grid container spacing={1}>
                 {buttons.map((button) => (
                     <Grid item key={button.name}>
                         <Button

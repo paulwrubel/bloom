@@ -4,7 +4,9 @@ import {
     AppletStateContext,
 } from 'components/AppletReducer';
 import ControlDrawer from 'components/ControlDrawer';
+import ButtonPanel from 'components/panels/ButtonPanel';
 import RadioButtonsPanel from 'components/panels/RadioButtonsPanel';
+import SwitchPanel from 'components/panels/SwitchPanel';
 import ActionPayload from 'interfaces/ActionPayload';
 import React, { useContext } from 'react';
 
@@ -143,6 +145,55 @@ const TrianglesControlDrawer: React.FC<OwnProps> = ({
                     {
                         value: 'multi_point',
                         label: 'Multi-Point',
+                    },
+                ]}
+            />
+            <SwitchPanel
+                switches={[
+                    {
+                        name: 'border',
+                        label: 'Border',
+                        isChecked: state.isBorderEnabled,
+                        onChange: (_, newValue) =>
+                            pseudoDispatch([
+                                {
+                                    action: 'SetIsBorderEnabled',
+                                    payload: newValue,
+                                },
+                            ]),
+                    },
+                    state.generationMode === 'continuous'
+                        ? {
+                              name: 'auto_fire',
+                              label: 'Auto Fire',
+                              isChecked: state.isAutoFireEnabled,
+                              onChange: (_, newValue) =>
+                                  pseudoDispatch([
+                                      {
+                                          action: 'SetIsAutoFireEnabled',
+                                          payload: newValue,
+                                      },
+                                  ]),
+                          }
+                        : undefined,
+                ]}
+            />
+            <ButtonPanel
+                buttons={[
+                    {
+                        name: 'clear_triangles',
+                        label: 'Clear Triangles',
+                        onClick: state.clearTrianglesCallback,
+                    },
+                    {
+                        name: 'clear_bullets',
+                        label: 'Clear Bullets',
+                        onClick: state.clearBulletsCallback,
+                    },
+                    {
+                        name: 'clear_gravity_points',
+                        label: 'Clear Gravity Points',
+                        onClick: state.clearGravityPointsCallback,
                     },
                 ]}
             />

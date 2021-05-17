@@ -2,7 +2,7 @@ import { FormLabel, Paper } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const StyledRadioButtonsPaper = styled(Paper)`
-    padding 15px 25px 5px 25px;
+    padding 16px 16px 8px 16px;
     background-color: ${(props) => props.theme.custom.palette.lightGrey};
 `;
 

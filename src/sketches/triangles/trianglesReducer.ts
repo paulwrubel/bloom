@@ -34,6 +34,9 @@ export const trianglesReducer: (
             case Action.UpdateTriangleCount:
                 state.triangleCount = payload;
                 break;
+            case Action.UpdateBulletCount:
+                state.bulletCount = payload;
+                break;
             case Action.UpdateTriangleUpdateTime:
                 state.triangleUpdateTime = payload;
                 break;

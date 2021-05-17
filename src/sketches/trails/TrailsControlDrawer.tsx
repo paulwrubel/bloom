@@ -56,7 +56,7 @@ const TrailsControlDrawer: React.FC<OwnProps> = ({ isControlDrawerOpen }) => {
                     {
                         name: 'clear_canvas',
                         label: 'Clear Canvas',
-                        onClick: () => state.clearCanvasCallback(),
+                        onClick: state.clearCanvasCallback,
                     },
                 ]}
             />

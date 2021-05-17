@@ -31,7 +31,7 @@ const AppletCard: React.FC<OwnProps> = ({ appletInfo }) => {
         .join(' | ');
 
     return (
-        <Grid item xs>
+        <Grid item>
             <AppletCardWrapper>
                 <StyledCard>
                     <CardHeader

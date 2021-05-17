@@ -634,7 +634,7 @@ let triangles = (p) => {
         gravityMode: newGravityMode,
         placementMode: newPlacementMode,
         aimMode: newAimMode,
-        isBorderEndable: newIsBorderEnabled,
+        isBorderEnabled: newIsBorderEnabled,
         isAutoFireEnabled: newIsAutoFireEnabled
     }) => {
         // sketch components

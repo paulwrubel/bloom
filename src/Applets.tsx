@@ -51,7 +51,7 @@ import {
 
 import p5_triangles from 'sketches/triangles/p5_triangles';
 import TrianglesControlDrawer from 'sketches/triangles/TrianglesControlDrawer';
-// import trianglesCardImage from 'sketches/triangles/trianglesCardImage.jpg';
+import trianglesCardImage from 'sketches/triangles/trianglesCardImage.jpg';
 import {
     trianglesInitialState,
     trianglesReducer,
@@ -158,11 +158,13 @@ const applets: AppletInfo[] = [
         name: 'triangles',
         displayName: 'Triangles',
         version: 'v0.8.2',
-        tagline: 'TODO',
-        description: 'TODO',
-        tags: ['interactive', 'simulation'],
+        tagline: 'A gravity-fuled Triangle bullet-hell,',
+        description: `This sketch is easily one of the most in-depth. You can place Triangles, shoot Bullets, 
+            move the Triangles with the arrow keys, change several modes that affect how Triangles are placed, 
+            where Bullets are shot, and how gravity affects those Bullets. It's a highly interactive, game-like plaything.`,
+        tags: ['interactive', 'simulation', 'gravity', 'complex'],
         creationDate: new Date('November 5, 2017 00:00:00'),
-        // cardImage: trianglesCardImage,
+        cardImage: trianglesCardImage,
 
         sketchInstance: p5_triangles,
         controlDrawerComponent: TrianglesControlDrawer as React.FC<
