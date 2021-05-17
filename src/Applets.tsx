@@ -158,7 +158,7 @@ const applets: AppletInfo[] = [
         name: 'triangles',
         displayName: 'Triangles',
         version: 'v0.8.2',
-        tagline: 'A gravity-fuled Triangle bullet-hell,',
+        tagline: 'A gravity-fueled Triangle bullet-hell,',
         description: `This sketch is easily one of the most in-depth. You can place Triangles, shoot Bullets, 
             move the Triangles with the arrow keys, change several modes that affect how Triangles are placed, 
             where Bullets are shot, and how gravity affects those Bullets. It's a highly interactive, game-like plaything.`,
